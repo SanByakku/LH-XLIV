@@ -52,6 +52,15 @@
             color: #777777;
             letter-spacing: 2px;
             text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .daily-quote {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding-top: 12px;
+            border-top: 1px solid #2a2a2a;
         }
 
         .matrix-section {
@@ -84,6 +93,21 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 11px;
             color: #999999;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #2a2a2a;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #ffffff;
+            -webkit-transition: width 0.3s;
+            transition: width 0.3s;
         }
 
         .dot-matrix {
@@ -122,6 +146,17 @@
             background-color: #7ec8e3;
         }
 
+        .dot-festivo {
+            outline: 2px solid #ffffff;
+            outline-offset: -1px;
+        }
+
+        .dot-festivo-filled {
+            background-color: #ffffff;
+            outline: 2px solid #777777;
+            outline-offset: -1px;
+        }
+
         .dot-redacted {
             background-color: #3a3a3a;
             position: relative;
@@ -151,13 +186,57 @@
             transform: translate(-50%, -50%) rotate(-45deg);
         }
 
+        .stats {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-top: 1px solid #2a2a2a;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: #777777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .motivation {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #1f1f1f;
+            border-left: 3px solid #ffffff;
+        }
+
+        .motivation-text {
+            font-size: 13px;
+            color: #cccccc;
+            font-style: italic;
+        }
+
         .legend {
             display: -webkit-box;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             padding-top: 15px;
-            border-top: 1px solid #2a2a2a;
         }
 
         .legend-item {
@@ -199,6 +278,12 @@
 
         .legend-dot-diego {
             background-color: #7ec8e3;
+        }
+
+        .legend-dot-festivo {
+            background-color: #2a2a2a;
+            outline: 2px solid #ffffff;
+            outline-offset: -1px;
         }
 
         .legend-dot-redacted {
@@ -245,6 +330,7 @@
         <header class="header">
             <h1 class="mission-id">LHXLIV</h1>
             <p class="mission-subtitle">Libre Hidalgo XLIV</p>
+            <p class="daily-quote" id="dailyQuote"></p>
         </header>
 
         <section class="matrix-section">
@@ -252,8 +338,27 @@
                 <span class="section-title">Registro de misión</span>
                 <span class="current-date" id="currentDate"></span>
             </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
             
             <div class="dot-matrix" id="dotMatrix"></div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="statCompleted">--</div>
+                    <div class="stat-label">Días en ZO</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="statPercent">--%</div>
+                    <div class="stat-label">Progreso</div>
+                </div>
+            </div>
+
+            <div class="motivation">
+                <p class="motivation-text" id="motivationText"></p>
+            </div>
             
             <div class="legend">
                 <div class="legend-item">
@@ -265,8 +370,8 @@
                     <span>Hoy</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-dot legend-dot-empty"></div>
-                    <span>Pendiente</span>
+                    <div class="legend-dot legend-dot-festivo"></div>
+                    <span>Festivo</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot legend-dot-amara"></div>
@@ -293,13 +398,36 @@
             var START = new Date(2025, 10, 20);
             var TOTAL = 196;
             
-            var REDACTED_START = new Date(2026, 4, 19);
-            var REDACTED_END = new Date(2026, 4, 27);
+            var REDACTED_START = new Date(2026, 4, 20);
+            var REDACTED_END = new Date(2026, 4, 24);
             var AMARA = new Date(2026, 3, 27);
             var DIEGO = new Date(2026, 4, 26);
             
+            var FESTIVOS = [
+                new Date(2025, 11, 6),
+                new Date(2025, 11, 8),
+                new Date(2025, 11, 24),
+                new Date(2025, 11, 25),
+                new Date(2025, 11, 31),
+                new Date(2026, 0, 1),
+                new Date(2026, 0, 6),
+                new Date(2026, 3, 2),
+                new Date(2026, 3, 3),
+                new Date(2026, 4, 1)
+            ];
+
+            var QUOTES = [
+                '"Estar contigo es como estar solo"',
+                '"Un corazón feliz es un corazón tranquilo"',
+                '"Me das paz en esta guerra"'
+            ];
+            
             var today = new Date();
             today.setHours(0, 0, 0, 0);
+
+            var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            var quoteIndex = dayOfYear % 3;
+            document.getElementById('dailyQuote').textContent = QUOTES[quoteIndex];
 
             function sameDay(a, b) {
                 return a.getDate() === b.getDate() && 
@@ -311,6 +439,13 @@
                 return d >= start && d <= end;
             }
 
+            function isFestivo(d) {
+                for (var i = 0; i < FESTIVOS.length; i++) {
+                    if (sameDay(d, FESTIVOS[i])) return true;
+                }
+                return false;
+            }
+
             function formatDate(d) {
                 var day = d.getDate();
                 var month = d.getMonth() + 1;
@@ -320,33 +455,60 @@
                 return day + '/' + month + '/' + year;
             }
 
+            function getMotivation(percent) {
+                if (percent < 25) return 'El camino acaba de empezar. Cada día cuenta.';
+                if (percent < 50) return 'Paso a paso, día a día. Ya queda menos.';
+                if (percent < 75) return 'Más de la mitad. La cuenta atrás ha comenzado.';
+                if (percent < 90) return 'Recta final. Pronto estaremos juntos.';
+                return 'Ya casi está. Muy pronto.';
+            }
+
             document.getElementById('currentDate').textContent = formatDate(today);
 
             var matrix = document.getElementById('dotMatrix');
             var html = '';
+            var completed = 0;
 
             for (var i = 0; i < TOTAL; i++) {
                 var d = new Date(START.getTime());
                 d.setDate(d.getDate() + i);
                 
                 var cls = 'dot';
+                var isPast = d < today;
+                var isToday = sameDay(d, today);
+                var festivo = isFestivo(d);
                 
                 if (sameDay(d, DIEGO)) {
                     cls = cls + ' dot-diego';
+                    if (isPast || isToday) completed++;
                 } else if (inRange(d, REDACTED_START, REDACTED_END)) {
                     cls = cls + ' dot-redacted';
                 } else if (sameDay(d, AMARA)) {
                     cls = cls + ' dot-amara';
-                } else if (d < today) {
-                    cls = cls + ' dot-filled';
-                } else if (sameDay(d, today)) {
+                    if (isPast || isToday) completed++;
+                } else if (isToday) {
                     cls = cls + ' dot-today';
+                    if (festivo) cls = cls + ' dot-festivo';
+                    completed++;
+                } else if (isPast) {
+                    cls = cls + ' dot-filled';
+                    if (festivo) cls = cls + ' dot-festivo-filled';
+                    completed++;
+                } else if (festivo) {
+                    cls = cls + ' dot-festivo';
                 }
                 
                 html = html + '<div class="' + cls + '"></div>';
             }
 
             matrix.innerHTML = html;
+
+            var percent = Math.round((completed / TOTAL) * 100);
+
+            document.getElementById('statCompleted').textContent = completed;
+            document.getElementById('statPercent').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('motivationText').textContent = getMotivation(percent);
         })();
     </script>
 </body>
