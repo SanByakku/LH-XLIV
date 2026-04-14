@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- iPhone PWA / Pantalla de inicio -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LHXLIV">
+    <meta name="theme-color" content="#111111">
+    
+    <!-- Icono para pantalla de inicio -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23111' width='100' height='100'/><text x='50' y='62' text-anchor='middle' font-family='monospace' font-size='20' fill='white'>XLIV</text></svg>">
+    
+    <title>LHXLIV</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #000000;
+            --gray-900: #111111;
+            --gray-800: #1a1a1a;
+            --gray-700: #2a2a2a;
+            --gray-600: #3a3a3a;
+            --gray-500: #555555;
+            --gray-400: #777777;
+            --gray-300: #999999;
+            --gray-200: #bbbbbb;
+            --gray-100: #dddddd;
+            --white: #ffffff;
+            --red: #cc3333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-900);
+            color: var(--gray-100);
+            min-height: 100%;
+            min-height: -webkit-fill-available;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding-left: max(20px, env(safe-area-inset-left));
+            padding-right: max(20px, env(safe-area-inset-right));
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gray-700);
+        }
+
+        .mission-id {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--white);
+            letter-spacing: 6px;
+            margin-bottom: 6px;
+        }
+
+        .mission-subtitle {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Matrix Section */
+        .matrix-section {
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            padding: 25px 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--gray-700);
+        }
+
+        .section-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .current-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gray-300);
+        }
+
+        /* Dot Matrix - Optimizado para iPhone */
+        .dot-matrix {
+            display: grid;
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            background: var(--gray-700);
+            position: relative;
+        }
+
+        .dot.filled {
+            background: var(--white);
+        }
+
+        .dot.today {
+            background: var(--gray-300);
+            outline: 2px solid var(--white);
+            outline-offset: 1px;
+        }
+
+        .dot.redacted {
+            background: var(--gray-600);
+            position: relative;
+        }
+
+        .dot.redacted::before,
+        .dot.redacted::after {
+            content: '';
+            position: absolute;
+            background: var(--red);
+        }
+
+        .dot.redacted::before {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .dot.redacted::after {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+
+        /* Legend */
+        .legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-700);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .legend-dot.empty { background: var(--gray-700); }
+        .legend-dot.filled { background: var(--white); }
+        .legend-dot.today { 
+            background: var(--gray-300); 
+            outline: 2px solid var(--white);
+            outline-offset: 1px;
+        }
+        .legend-dot.redacted {
+            background: var(--gray-600);
+        }
+        .legend-dot.redacted::before,
+        .legend-dot.redacted::after {
+            content: '';
+            position: absolute;
+            background: var(--red);
+        }
+        .legend-dot.redacted::before {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%) rotate(45deg);
+        }
+        .legend-dot.redacted::after {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--gray-500);
+            letter-spacing: 1px;
+        }
+
+        /* iPhone SE y pantallas pequeñas */
+        @media (max-width: 375px) {
+            .dot {
+                width: 12px;
+                height: 12px;
+            }
+            .dot-matrix {
+                gap: 3px;
+            }
+        }
+
+        /* iPhone Pro Max y pantallas grandes */
+        @media (min-width: 414px) {
+            .dot {
+                width: 16px;
+                height: 16px;
+            }
+            .dot-matrix {
+                gap: 5px;
+            }
+            .matrix-section {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="mission-id">LHXLIV</h1>
+            <p class="mission-subtitle">Libre Hidalgo XLIV</p>
+        </header>
+
+        <section class="matrix-section">
+            <div class="section-header">
+                <span class="section-title">Registro de misión</span>
+                <span class="current-date" id="currentDate"></span>
+            </div>
+            
+            <div class="dot-matrix" id="dotMatrix"></div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot filled"></div>
+                    <span>Completado</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot today"></div>
+                    <span>Hoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot empty"></div>
+                    <span>Pendiente</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot redacted"></div>
+                    <span>Clasificado</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            NOV 2025 — MAY 2026
+        </footer>
+    </div>
+
+    <script>
+        // Configuration
+        const START_DATE = new Date(2025, 10, 20);
+        const END_DATE = new Date(2026, 4, 27);
+        
+        const REDACTED_START = new Date(2026, 4, 19);
+        const REDACTED_END = new Date(2026, 4, 27);
+
+        const totalDays = Math.ceil((END_DATE - START_DATE) / (1000 * 60 * 60 * 24)) + 1;
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        function formatDateShort(date) {
+            return date.toLocaleDateString('es-ES', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
+
+        function isRedacted(date) {
+            return date >= REDACTED_START && date <= REDACTED_END;
+        }
+
+        // Calcular columnas según ancho de pantalla
+        function getOptimalColumns() {
+            const screenWidth = window.innerWidth;
+            const padding = 40;
+            const gap = screenWidth < 375 ? 3 : (screenWidth >= 414 ? 5 : 4);
+            const dotSize = screenWidth < 375 ? 12 : (screenWidth >= 414 ? 16 : 14);
+            const availableWidth = screenWidth - padding - 42; // 42 = padding del matrix-section
+            const cols = Math.floor(availableWidth / (dotSize + gap));
+            return Math.min(cols, Math.ceil(Math.sqrt(totalDays)));
+        }
+
+        function createDotMatrix() {
+            const matrix = document.getElementById('dotMatrix');
+            matrix.innerHTML = '';
+            
+            const cols = getOptimalColumns();
+            const dotSize = window.innerWidth < 375 ? 12 : (window.innerWidth >= 414 ? 16 : 14);
+            matrix.style.gridTemplateColumns = `repeat(${cols}, ${dotSize}px)`;
+
+            for (let i = 0; i < totalDays; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                
+                const dotDate = new Date(START_DATE);
+                dotDate.setDate(dotDate.getDate() + i);
+                
+                if (isRedacted(dotDate)) {
+                    dot.classList.add('redacted');
+                } else {
+                    if (dotDate < today) {
+                        dot.classList.add('filled');
+                    } else if (dotDate.toDateString() === today.toDateString()) {
+                        dot.classList.add('today');
+                    }
+                }
+                
+                matrix.appendChild(dot);
+            }
+        }
+
+        document.getElementById('currentDate').textContent = formatDateShort(today);
+        createDotMatrix();
+
+        // Recalcular al rotar pantalla
+        window.addEventListener('resize', () => {
+            createDotMatrix();
+        });
+
+        // Auto-refresh a medianoche
+        setInterval(() => {
+            const now = new Date();
+            if (now.getDate() !== today.getDate()) {
+                location.reload();
+            }
+        }, 60000);
+    </script>
+</body>
+</html>
