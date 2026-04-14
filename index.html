@@ -31,6 +31,8 @@
             --gray-100: #dddddd;
             --white: #ffffff;
             --red: #cc3333;
+            --pink-sandia: #ff6b8a;
+            --azul-celeste: #7ec8e3;
         }
 
         * {
@@ -145,6 +147,18 @@
             outline-offset: 1px;
         }
 
+        .dot.birthday-amara {
+            background: var(--pink-sandia);
+            outline: 2px solid var(--pink-sandia);
+            outline-offset: 1px;
+        }
+
+        .dot.birthday-diego {
+            background: var(--azul-celeste);
+            outline: 2px solid var(--azul-celeste);
+            outline-offset: 1px;
+        }
+
         .dot.redacted {
             background: var(--gray-600);
             position: relative;
@@ -205,6 +219,12 @@
             background: var(--gray-300); 
             outline: 2px solid var(--white);
             outline-offset: 1px;
+        }
+        .legend-dot.birthday-amara {
+            background: var(--pink-sandia);
+        }
+        .legend-dot.birthday-diego {
+            background: var(--azul-celeste);
         }
         .legend-dot.redacted {
             background: var(--gray-600);
@@ -295,6 +315,14 @@
                     <span>Pendiente</span>
                 </div>
                 <div class="legend-item">
+                    <div class="legend-dot birthday-amara"></div>
+                    <span>Amara ♡</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot birthday-diego"></div>
+                    <span>Diego</span>
+                </div>
+                <div class="legend-item">
                     <div class="legend-dot redacted"></div>
                     <span>Clasificado</span>
                 </div>
@@ -307,14 +335,15 @@
     </div>
 
     <script>
-        // Configuration
-        const START_DATE = new Date(2025, 10, 20);
-        const END_DATE = new Date(2026, 4, 27);
+        // Configuration - 196 días = 14x14 matriz perfecta
+        const START_DATE = new Date(2025, 10, 20); // 20 Nov 2025
+        const TOTAL_CELLS = 196; // 14x14 matriz cuadrada perfecta
         
-        const REDACTED_START = new Date(2026, 4, 19);
-        const REDACTED_END = new Date(2026, 4, 27);
-
-        const totalDays = Math.ceil((END_DATE - START_DATE) / (1000 * 60 * 60 * 24)) + 1;
+        // Fechas especiales
+        const REDACTED_START = new Date(2026, 4, 19); // 19 Mayo
+        const REDACTED_END = new Date(2026, 4, 27);   // 27 Mayo
+        const BIRTHDAY_AMARA = new Date(2026, 3, 27); // 27 Abril 2026
+        const BIRTHDAY_DIEGO = new Date(2026, 4, 26); // 26 Mayo 2026
         
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -331,34 +360,39 @@
             return date >= REDACTED_START && date <= REDACTED_END;
         }
 
-        // Calcular columnas según ancho de pantalla
-        function getOptimalColumns() {
-            const screenWidth = window.innerWidth;
-            const padding = 40;
-            const gap = screenWidth < 375 ? 3 : (screenWidth >= 414 ? 5 : 4);
-            const dotSize = screenWidth < 375 ? 12 : (screenWidth >= 414 ? 16 : 14);
-            const availableWidth = screenWidth - padding - 42; // 42 = padding del matrix-section
-            const cols = Math.floor(availableWidth / (dotSize + gap));
-            return Math.min(cols, Math.ceil(Math.sqrt(totalDays)));
+        function isBirthdayAmara(date) {
+            return date.getDate() === BIRTHDAY_AMARA.getDate() && 
+                   date.getMonth() === BIRTHDAY_AMARA.getMonth() && 
+                   date.getFullYear() === BIRTHDAY_AMARA.getFullYear();
+        }
+
+        function isBirthdayDiego(date) {
+            return date.getDate() === BIRTHDAY_DIEGO.getDate() && 
+                   date.getMonth() === BIRTHDAY_DIEGO.getMonth() && 
+                   date.getFullYear() === BIRTHDAY_DIEGO.getFullYear();
         }
 
         function createDotMatrix() {
             const matrix = document.getElementById('dotMatrix');
             matrix.innerHTML = '';
             
-            const cols = getOptimalColumns();
+            const cols = 14; // Matriz 14x14
             const dotSize = window.innerWidth < 375 ? 12 : (window.innerWidth >= 414 ? 16 : 14);
             matrix.style.gridTemplateColumns = `repeat(${cols}, ${dotSize}px)`;
 
-            for (let i = 0; i < totalDays; i++) {
+            for (let i = 0; i < TOTAL_CELLS; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'dot';
                 
                 const dotDate = new Date(START_DATE);
                 dotDate.setDate(dotDate.getDate() + i);
                 
-                if (isRedacted(dotDate)) {
+                if (isBirthdayDiego(dotDate)) {
+                    dot.classList.add('birthday-diego');
+                } else if (isRedacted(dotDate)) {
                     dot.classList.add('redacted');
+                } else if (isBirthdayAmara(dotDate)) {
+                    dot.classList.add('birthday-amara');
                 } else {
                     if (dotDate < today) {
                         dot.classList.add('filled');
@@ -374,12 +408,10 @@
         document.getElementById('currentDate').textContent = formatDateShort(today);
         createDotMatrix();
 
-        // Recalcular al rotar pantalla
         window.addEventListener('resize', () => {
             createDotMatrix();
         });
 
-        // Auto-refresh a medianoche
         setInterval(() => {
             const now = new Date();
             if (now.getDate() !== today.getDate()) {
