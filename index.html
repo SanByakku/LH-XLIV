@@ -216,26 +216,35 @@
         }
 
         .mission-time {
-            text-align: center;
-            padding: 10px;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 12px;
             margin-bottom: 10px;
             background-color: #1a1a1a;
             border: 1px solid #2a2a2a;
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .mission-time-label {
-            font-size: 8px;
-            color: #777777;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
+        .mission-time-item {
+            text-align: center;
         }
 
         .mission-time-value {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
             color: #00ff00;
             letter-spacing: 1px;
+        }
+
+        .mission-time-label {
+            font-size: 7px;
+            color: #777777;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            text-transform: uppercase;
         }
 
         .header {
@@ -375,42 +384,145 @@
             line-height: 1.4;
         }
 
-        .distance-box {
-            text-align: center;
-            padding: 12px;
+        /* Tactical Map Styles */
+        .tactical-map {
+            position: relative;
+            width: 100%;
+            height: 200px;
             margin-bottom: 10px;
-            background-color: #1a1a1a;
-            border: 1px solid #2a2a2a;
+            background-color: #0a1a0a;
+            border: 1px solid #1a3a1a;
+            overflow: hidden;
         }
 
-        .distance-label {
+        .map-world {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .map-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.08) 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+
+        .map-label {
+            position: absolute;
+            top: 8px;
+            left: 10px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 8px;
-            color: #777777;
+            color: #00ff00;
             letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
+            z-index: 10;
         }
 
-        .distance-value {
+        .map-coords {
+            position: absolute;
+            top: 8px;
+            right: 10px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffffff;
-            letter-spacing: 2px;
+            font-size: 7px;
+            color: #006600;
+            text-align: right;
+            z-index: 10;
         }
 
-        .distance-unit {
-            font-size: 12px;
-            color: #777777;
-            margin-left: 4px;
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
         }
 
-        .distance-subtext {
+        .map-line {
+            stroke: #00ff00;
+            stroke-width: 2;
+            stroke-dasharray: 8, 4;
+            fill: none;
+            -webkit-animation: dashMove 2s linear infinite;
+            animation: dashMove 2s linear infinite;
+        }
+
+        @-webkit-keyframes dashMove {
+            to { stroke-dashoffset: -24; }
+        }
+
+        @keyframes dashMove {
+            to { stroke-dashoffset: -24; }
+        }
+
+        .map-point {
+            fill: none;
+            stroke-width: 2;
+            -webkit-animation: pointPulse 2s ease-in-out infinite;
+            animation: pointPulse 2s ease-in-out infinite;
+        }
+
+        .map-point-amara {
+            stroke: #ff6b8a;
+        }
+
+        .map-point-diego {
+            stroke: #7ec8e3;
+        }
+
+        @-webkit-keyframes pointPulse {
+            0%, 100% { r: 8; opacity: 1; }
+            50% { r: 12; opacity: 0.5; }
+        }
+
+        @keyframes pointPulse {
+            0%, 100% { r: 8; opacity: 1; }
+            50% { r: 12; opacity: 0.5; }
+        }
+
+        .map-point-center {
+            -webkit-animation: none;
+            animation: none;
+        }
+
+        .map-point-center-amara {
+            fill: #ff6b8a;
+        }
+
+        .map-point-center-diego {
+            fill: #7ec8e3;
+        }
+
+        .map-point-label {
+            font-family: 'Courier New', Courier, monospace;
             font-size: 9px;
-            color: #555555;
-            margin-top: 4px;
-            font-style: italic;
+            fill: #ffffff;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+
+        .map-distance {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            color: #00ff00;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px 15px;
+            border: 1px solid #00ff00;
+            z-index: 10;
         }
 
         .clocks {
@@ -804,8 +916,18 @@
         <div class="dashboard-title">▌ OPERATIONAL DASHBOARD ▌</div>
 
         <div class="mission-time">
-            <div class="mission-time-label">MISSION TIME ELAPSED</div>
-            <div class="mission-time-value" id="missionTime">--D --H --W</div>
+            <div class="mission-time-item">
+                <div class="mission-time-value" id="missionHours">--</div>
+                <div class="mission-time-label">Horas</div>
+            </div>
+            <div class="mission-time-item">
+                <div class="mission-time-value" id="missionDays">--</div>
+                <div class="mission-time-label">Días</div>
+            </div>
+            <div class="mission-time-item">
+                <div class="mission-time-value" id="missionWeeks">--</div>
+                <div class="mission-time-label">Semanas</div>
+            </div>
         </div>
 
         <header class="header">
@@ -837,10 +959,58 @@
             <div class="briefing-text" id="briefingText"></div>
         </div>
 
-        <div class="distance-box">
-            <div class="distance-label">Distancia entre nosotros</div>
-            <div class="distance-value">3.680<span class="distance-unit">km</span></div>
-            <div class="distance-subtext">...pero cada día más cerca</div>
+        <!-- Tactical Map with World Background -->
+        <div class="tactical-map">
+            <!-- World Map SVG Background -->
+            <svg class="map-world" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice">
+                <!-- Simplified world continents -->
+                <g fill="#0a3a0a" stroke="#00ff00" stroke-width="0.5">
+                    <!-- Europe -->
+                    <path d="M480 120 L520 110 L560 115 L580 130 L570 150 L550 160 L520 165 L490 160 L470 145 L475 130 Z"/>
+                    <!-- Spain/Iberian Peninsula -->
+                    <path d="M440 150 L470 145 L480 155 L475 175 L455 185 L435 175 L430 160 Z"/>
+                    <!-- UK -->
+                    <path d="M450 100 L465 95 L470 110 L460 120 L445 115 Z"/>
+                    <!-- Scandinavia -->
+                    <path d="M500 60 L520 50 L540 55 L545 80 L530 100 L510 95 L495 75 Z"/>
+                    <!-- Africa North -->
+                    <path d="M430 190 L520 185 L580 200 L600 230 L580 280 L520 300 L460 290 L420 250 L410 210 Z"/>
+                    <!-- Middle East -->
+                    <path d="M580 160 L620 155 L660 170 L670 200 L650 230 L600 230 L580 200 L575 175 Z"/>
+                    <!-- Asia -->
+                    <path d="M620 80 L750 70 L850 90 L900 130 L880 180 L820 200 L750 190 L700 160 L660 130 L640 100 Z"/>
+                    <!-- Russia -->
+                    <path d="M560 50 L700 40 L800 50 L850 70 L820 90 L750 85 L680 80 L600 70 L570 60 Z"/>
+                    <!-- Americas simplified -->
+                    <path d="M150 80 L200 70 L250 90 L260 150 L240 200 L200 180 L160 140 L140 100 Z"/>
+                    <path d="M200 220 L240 210 L270 250 L280 320 L260 380 L220 400 L180 370 L170 300 L185 250 Z"/>
+                </g>
+            </svg>
+            
+            <div class="map-grid"></div>
+            <div class="map-label">TACTICAL OVERVIEW</div>
+            <div class="map-coords">
+                ESP 41.76°N 4.71°W<br>
+                LBN 33.36°N 35.59°E
+            </div>
+            
+            <!-- Overlay with points and line -->
+            <svg class="map-overlay" viewBox="0 0 400 200">
+                <!-- Connection line -->
+                <path class="map-line" d="M 95 95 Q 200 70 305 115" />
+                
+                <!-- Amara point (Spain) - positioned over Iberian Peninsula -->
+                <circle class="map-point map-point-amara" cx="95" cy="95" r="10" />
+                <circle class="map-point-center map-point-center-amara" cx="95" cy="95" r="4" />
+                <text class="map-point-label" x="95" y="125">AMARA</text>
+                
+                <!-- Diego point (Lebanon) - positioned over Middle East -->
+                <circle class="map-point map-point-diego" cx="305" cy="115" r="10" />
+                <circle class="map-point-center map-point-center-diego" cx="305" cy="115" r="4" />
+                <text class="map-point-label" x="305" y="145">DIEGO</text>
+            </svg>
+            
+            <div class="map-distance">3.680 KM</div>
         </div>
 
         <div class="clocks">
@@ -985,21 +1155,25 @@
             var quoteIndex = dayOfYear % 3;
             document.getElementById('dailyQuote').textContent = QUOTES[quoteIndex];
 
-            // Mission time
+            // Mission time - separate counters
             function updateMissionTime() {
                 var now = new Date();
                 var diff = now - START;
                 
                 if (diff < 0) {
-                    document.getElementById('missionTime').textContent = 'NOT STARTED';
+                    document.getElementById('missionHours').textContent = '0';
+                    document.getElementById('missionDays').textContent = '0';
+                    document.getElementById('missionWeeks').textContent = '0';
                     return;
                 }
                 
+                var totalHours = Math.floor(diff / (1000 * 60 * 60));
                 var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var weeks = Math.floor(days / 7);
                 
-                document.getElementById('missionTime').textContent = days + 'D ' + hours + 'H • ' + weeks + 'W';
+                document.getElementById('missionHours').textContent = totalHours.toLocaleString();
+                document.getElementById('missionDays').textContent = days;
+                document.getElementById('missionWeeks').textContent = weeks;
             }
             
             updateMissionTime();
