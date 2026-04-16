@@ -169,6 +169,44 @@
             letter-spacing: 1px;
         }
 
+        .distance-box {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+        }
+
+        .distance-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #777777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .distance-value {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+
+        .distance-unit {
+            font-size: 14px;
+            color: #777777;
+            margin-left: 4px;
+        }
+
+        .distance-subtext {
+            font-size: 9px;
+            color: #555555;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
         .clocks {
             display: -webkit-box;
             display: flex;
@@ -557,6 +595,12 @@
             </div>
         </div>
 
+        <div class="distance-box">
+            <div class="distance-label">Distancia entre nosotros</div>
+            <div class="distance-value">3.680<span class="distance-unit">km</span></div>
+            <div class="distance-subtext">...pero cada día más cerca</div>
+        </div>
+
         <div class="clocks">
             <div class="clock">
                 <div class="clock-flag">🇪🇸</div>
@@ -664,7 +708,7 @@
 
             // Cargar estados desde Google Sheets
             function loadStatus(sheetId, dotId, textId, type) {
-                var url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv&sheet=Sheet1&range=A1';
+                var url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv&range=A1';
                 
                 fetch(url)
                     .then(function(response) { return response.text(); })
