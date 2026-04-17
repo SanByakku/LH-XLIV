@@ -976,20 +976,27 @@
                 DIEGO 33.36°N 35.59°E
             </div>
             
-            <!-- Overlay with points and line - viewBox matches image aspect ratio 1536x1024 -->
-            <svg class="map-overlay" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice">
-                <!-- Connection line - curved path over Mediterranean -->
-                <path class="map-line" d="M 400 650 C 620 520, 880 600, 1100 760" stroke-width="4" />
-                
-                <!-- Amara point (Cigales/Valladolid - centro España) -->
-                <circle class="map-point map-point-amara" cx="400" cy="650" r="20" />
-                <circle class="map-point-center map-point-center-amara" cx="400" cy="650" r="8" />
-                <text class="map-point-label" x="400" y="610" style="font-size: 28px;">AMARA</text>
-                
-                <!-- Diego point (Marjayoun, Líbano) -->
-                <circle class="map-point map-point-diego" cx="1100" cy="760" r="20" />
-                <circle class="map-point-center map-point-center-diego" cx="1100" cy="760" r="8" />
-                <text class="map-point-label" x="1100" y="720" style="font-size: 28px;">DIEGO</text>
+            <!-- AMARA point - positioned with percentages (easy to adjust) -->
+            <!-- left: 0% = borde izquierdo, 100% = borde derecho -->
+            <!-- top: 0% = arriba, 100% = abajo -->
+            <div style="position: absolute; left: 22%; top: 25%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
+                <div style="font-family: 'Courier New', monospace; font-size: 9px; color: #ffffff; font-weight: bold; margin-bottom: 4px;">AMARA</div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #ff6b8a; margin: 0 auto; display: flex; align-items: center; justify-content: center; animation: pointPulse 2s ease-in-out infinite;">
+                    <div style="width: 6px; height: 6px; border-radius: 50%; background-color: #ff6b8a;"></div>
+                </div>
+            </div>
+            
+            <!-- DIEGO point - positioned with percentages -->
+            <div style="position: absolute; left: 68%; top: 38%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
+                <div style="font-family: 'Courier New', monospace; font-size: 9px; color: #ffffff; font-weight: bold; margin-bottom: 4px;">DIEGO</div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #7ec8e3; margin: 0 auto; display: flex; align-items: center; justify-content: center; animation: pointPulse 2s ease-in-out infinite;">
+                    <div style="width: 6px; height: 6px; border-radius: 50%; background-color: #7ec8e3;"></div>
+                </div>
+            </div>
+            
+            <!-- Connection line SVG -->
+            <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;">
+                <line x1="22%" y1="27%" x2="68%" y2="40%" stroke="#00ff00" stroke-width="2" stroke-dasharray="8,4" style="animation: dashMove 2s linear infinite;"/>
             </svg>
             
             <div class="map-distance">3.680 KM</div>
