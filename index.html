@@ -174,8 +174,8 @@
             align-items: center;
             gap: 6px;
             padding: 6px 12px;
-            background-color: #2a0a0a;
-            border: 1px solid #ff3333;
+            background-color: #2a2a0a;
+            border: 1px solid #ffcc00;
             margin-bottom: 10px;
             font-family: 'Courier New', Courier, monospace;
         }
@@ -184,26 +184,26 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: #ff3333;
-            box-shadow: 0 0 8px #ff3333;
+            background-color: #ffcc00;
+            box-shadow: 0 0 8px #ffcc00;
             -webkit-animation: alertPulse 1s ease-in-out infinite;
             animation: alertPulse 1s ease-in-out infinite;
         }
 
         @-webkit-keyframes alertPulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 8px #ff3333; }
-            50% { opacity: 0.6; box-shadow: 0 0 15px #ff3333; }
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px #ffcc00; }
+            50% { opacity: 0.6; box-shadow: 0 0 15px #ffcc00; }
         }
 
         @keyframes alertPulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 8px #ff3333; }
-            50% { opacity: 0.6; box-shadow: 0 0 15px #ff3333; }
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px #ffcc00; }
+            50% { opacity: 0.6; box-shadow: 0 0 15px #ffcc00; }
         }
 
         .alert-text {
             font-size: 9px;
             font-weight: bold;
-            color: #ff3333;
+            color: #ffcc00;
             letter-spacing: 2px;
         }
 
@@ -915,7 +915,7 @@
 
         <div class="alert-level">
             <div class="alert-dot"></div>
-            <span class="alert-text">⚠ ALERT LEVEL: RED • SIP 3</span>
+            <span class="alert-text">⚠ ALERT LEVEL: YELLOW • SIP 2</span>
         </div>
         
         <div class="dashboard-title">▌ OPERATIONAL DASHBOARD ▌</div>
@@ -979,7 +979,7 @@
             <!-- AMARA point - positioned with percentages (easy to adjust) -->
             <!-- left: 0% = borde izquierdo, 100% = borde derecho -->
             <!-- top: 0% = arriba, 100% = abajo -->
-            <div style="position: absolute; left: 20%; top: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
+            <div style="position: absolute; left: 18%; top: 46%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
                 <div style="font-family: 'Courier New', monospace; font-size: 9px; color: #ffffff; font-weight: bold; margin-bottom: 4px;">AMARA</div>
                 <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #ff6b8a; margin: 0 auto; display: flex; align-items: center; justify-content: center; animation: pointPulse 2s ease-in-out infinite;">
                     <div style="width: 6px; height: 6px; border-radius: 50%; background-color: #ff6b8a;"></div>
@@ -987,7 +987,7 @@
             </div>
             
             <!-- DIEGO point - positioned with percentages -->
-            <div style="position: absolute; left: 68%; top: 65%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
+            <div style="position: absolute; left: 68%; top: 70%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
                 <div style="font-family: 'Courier New', monospace; font-size: 9px; color: #ffffff; font-weight: bold; margin-bottom: 4px;">DIEGO</div>
                 <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #7ec8e3; margin: 0 auto; display: flex; align-items: center; justify-content: center; animation: pointPulse 2s ease-in-out infinite;">
                     <div style="width: 6px; height: 6px; border-radius: 50%; background-color: #7ec8e3;"></div>
@@ -996,7 +996,7 @@
             
             <!-- Connection line SVG -->
             <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;">
-                <line x1="20%" y1="52%" x2="68%" y2="67%" stroke="#00ff00" stroke-width="2" stroke-dasharray="8,4" style="animation: dashMove 2s linear infinite;"/>
+                <line x1="18%" y1="48%" x2="68%" y2="72%" stroke="#00ff00" stroke-width="2" stroke-dasharray="8,4" style="animation: dashMove 2s linear infinite;"/>
             </svg>
             
             <div class="map-distance">3.680 KM</div>
