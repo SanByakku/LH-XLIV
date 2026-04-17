@@ -347,6 +347,26 @@
             box-shadow: 0 0 6px #ff3333;
         }
 
+        .status-dot-pink {
+            background-color: #ff6b8a;
+            box-shadow: 0 0 6px #ff6b8a;
+        }
+
+        .status-dot-blue {
+            background-color: #7ec8e3;
+            box-shadow: 0 0 6px #7ec8e3;
+        }
+
+        .status-dot-orange {
+            background-color: #ff9933;
+            box-shadow: 0 0 6px #ff9933;
+        }
+
+        .status-dot-gray {
+            background-color: #888888;
+            box-shadow: 0 0 6px #888888;
+        }
+
         @-webkit-keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
@@ -363,6 +383,34 @@
             font-weight: bold;
             color: #ffffff;
             letter-spacing: 1px;
+        }
+
+        .hot-box {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #2a1520;
+            border: 2px solid #ff6b8a;
+            text-align: center;
+            -webkit-animation: hotPulse 1.5s ease-in-out infinite;
+            animation: hotPulse 1.5s ease-in-out infinite;
+        }
+
+        .hot-text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff6b8a;
+            letter-spacing: 3px;
+        }
+
+        @-webkit-keyframes hotPulse {
+            0%, 100% { box-shadow: 0 0 5px #ff6b8a; }
+            50% { box-shadow: 0 0 20px #ff6b8a; }
+        }
+
+        @keyframes hotPulse {
+            0%, 100% { box-shadow: 0 0 5px #ff6b8a; }
+            50% { box-shadow: 0 0 20px #ff6b8a; }
         }
 
         .briefing-box {
@@ -959,6 +1007,11 @@
             </div>
         </div>
 
+        <!-- Hot status box - solo aparece si A2 = si/hot -->
+        <div class="hot-box" id="hotBox" style="display: none;">
+            <span class="hot-text">💗 HOT 💗</span>
+        </div>
+
         <div class="briefing-box" id="briefingBox" style="display: none;">
             <div class="briefing-label">♡ Briefing de Amara</div>
             <div class="briefing-text" id="briefingText"></div>
@@ -994,9 +1047,14 @@
                 </div>
             </div>
             
-            <!-- Connection line SVG -->
-            <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;">
-                <line x1="18%" y1="48%" x2="68%" y2="72%" stroke="#00ff00" stroke-width="2" stroke-dasharray="8,4" style="animation: dashMove 2s linear infinite;"/>
+            <!-- Connection line SVG - smooth curve -->
+            <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M 18 46 Q 43 30, 68 70" 
+                      stroke="#00ff00" 
+                      stroke-width="0.4" 
+                      stroke-dasharray="2,1" 
+                      fill="none"
+                      style="animation: dashMove 2s linear infinite;"/>
             </svg>
             
             <div class="map-distance">3.680 KM</div>
@@ -1245,6 +1303,15 @@
                             } else if (status === 'mal') {
                                 dot.classList.add('status-dot-red');
                                 text.textContent = 'MAL';
+                            } else if (status === 'hambrienta') {
+                                dot.classList.add('status-dot-orange');
+                                text.textContent = 'HAMBRIENTA';
+                            } else if (status === 'cansada') {
+                                dot.classList.add('status-dot-gray');
+                                text.textContent = 'CANSADA';
+                            } else if (status === 'triste') {
+                                dot.classList.add('status-dot-blue');
+                                text.textContent = 'TRISTE';
                             } else {
                                 dot.classList.add('status-dot-green');
                                 text.textContent = status.toUpperCase() || 'SIN DATOS';
@@ -1256,9 +1323,30 @@
                     });
             }
 
-            // Cargar briefing de Amara desde A2
-            function loadBriefing() {
+            // Cargar estado "Hot" de Amara desde A2
+            function loadHotStatus() {
                 var url = 'https://docs.google.com/spreadsheets/d/' + AMARA_SHEET_ID + '/gviz/tq?tqx=out:csv&range=A2';
+                
+                fetch(url)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var hotStatus = data.replace(/"/g, '').trim().toLowerCase();
+                        var hotBox = document.getElementById('hotBox');
+                        
+                        if (hotStatus === 'si' || hotStatus === 'sí' || hotStatus === 'yes' || hotStatus === 'hot') {
+                            hotBox.style.display = 'block';
+                        } else {
+                            hotBox.style.display = 'none';
+                        }
+                    })
+                    .catch(function() {
+                        // Silently fail
+                    });
+            }
+
+            // Cargar briefing de Amara desde A3
+            function loadBriefing() {
+                var url = 'https://docs.google.com/spreadsheets/d/' + AMARA_SHEET_ID + '/gviz/tq?tqx=out:csv&range=A3';
                 
                 fetch(url)
                     .then(function(response) { return response.text(); })
@@ -1277,6 +1365,7 @@
 
             loadStatus(DIEGO_SHEET_ID, 'diegoStatusDot', 'diegoStatusText', 'diego');
             loadStatus(AMARA_SHEET_ID, 'amaraStatusDot', 'amaraStatusText', 'amara');
+            loadHotStatus();
             loadBriefing();
 
             // Relojes
