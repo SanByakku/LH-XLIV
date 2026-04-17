@@ -964,55 +964,32 @@
             <div class="briefing-text" id="briefingText"></div>
         </div>
 
-        <!-- Tactical Map with World Background -->
+        <!-- Tactical Map - Mediterranean Region (Real Image) -->
         <div class="tactical-map">
-            <!-- World Map SVG Background -->
-            <svg class="map-world" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice">
-                <!-- Simplified world continents -->
-                <g fill="#0a3a0a" stroke="#00ff00" stroke-width="0.5">
-                    <!-- Europe -->
-                    <path d="M480 120 L520 110 L560 115 L580 130 L570 150 L550 160 L520 165 L490 160 L470 145 L475 130 Z"/>
-                    <!-- Spain/Iberian Peninsula -->
-                    <path d="M440 150 L470 145 L480 155 L475 175 L455 185 L435 175 L430 160 Z"/>
-                    <!-- UK -->
-                    <path d="M450 100 L465 95 L470 110 L460 120 L445 115 Z"/>
-                    <!-- Scandinavia -->
-                    <path d="M500 60 L520 50 L540 55 L545 80 L530 100 L510 95 L495 75 Z"/>
-                    <!-- Africa North -->
-                    <path d="M430 190 L520 185 L580 200 L600 230 L580 280 L520 300 L460 290 L420 250 L410 210 Z"/>
-                    <!-- Middle East -->
-                    <path d="M580 160 L620 155 L660 170 L670 200 L650 230 L600 230 L580 200 L575 175 Z"/>
-                    <!-- Asia -->
-                    <path d="M620 80 L750 70 L850 90 L900 130 L880 180 L820 200 L750 190 L700 160 L660 130 L640 100 Z"/>
-                    <!-- Russia -->
-                    <path d="M560 50 L700 40 L800 50 L850 70 L820 90 L750 85 L680 80 L600 70 L570 60 Z"/>
-                    <!-- Americas simplified -->
-                    <path d="M150 80 L200 70 L250 90 L260 150 L240 200 L200 180 L160 140 L140 100 Z"/>
-                    <path d="M200 220 L240 210 L270 250 L280 320 L260 380 L220 400 L180 370 L170 300 L185 250 Z"/>
-                </g>
-            </svg>
+            <!-- Real satellite map image -->
+            <img src="/LH-XLIV/map-mediterranean.png" alt="Mediterranean Map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
             
             <div class="map-grid"></div>
             <div class="map-label">TACTICAL OVERVIEW</div>
             <div class="map-coords">
-                ESP 41.76°N 4.71°W<br>
-                LBN 33.36°N 35.59°E
+                AMARA 41.76°N 4.71°W<br>
+                DIEGO 33.36°N 35.59°E
             </div>
             
             <!-- Overlay with points and line -->
-            <svg class="map-overlay" viewBox="0 0 400 200">
-                <!-- Connection line -->
-                <path class="map-line" d="M 95 95 Q 200 70 305 115" />
+            <svg class="map-overlay" viewBox="0 0 600 280">
+                <!-- Connection line - curved path over Mediterranean -->
+                <path class="map-line" d="M 115 95 C 200 70, 380 110, 510 145" />
                 
-                <!-- Amara point (Spain) - positioned over Iberian Peninsula -->
-                <circle class="map-point map-point-amara" cx="95" cy="95" r="10" />
-                <circle class="map-point-center map-point-center-amara" cx="95" cy="95" r="4" />
-                <text class="map-point-label" x="95" y="125">AMARA</text>
+                <!-- Amara point (Spain - Valladolid/Cigales area) -->
+                <circle class="map-point map-point-amara" cx="115" cy="95" r="8" />
+                <circle class="map-point-center map-point-center-amara" cx="115" cy="95" r="3" />
+                <text class="map-point-label" x="115" y="82">AMARA</text>
                 
-                <!-- Diego point (Lebanon) - positioned over Middle East -->
-                <circle class="map-point map-point-diego" cx="305" cy="115" r="10" />
-                <circle class="map-point-center map-point-center-diego" cx="305" cy="115" r="4" />
-                <text class="map-point-label" x="305" y="145">DIEGO</text>
+                <!-- Diego point (Lebanon - Base Miguel de Cervantes) -->
+                <circle class="map-point map-point-diego" cx="510" cy="145" r="8" />
+                <circle class="map-point-center map-point-center-diego" cx="510" cy="145" r="3" />
+                <text class="map-point-label" x="510" y="132">DIEGO</text>
             </svg>
             
             <div class="map-distance">3.680 KM</div>
