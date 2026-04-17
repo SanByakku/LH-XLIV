@@ -1316,21 +1316,42 @@
                 <div class="control-group">
                     <div class="control-label">Amara • Hot</div>
                     <div class="control-toggle">
-                        <button id="hotNo" class="control-toggle-btn active" onclick="setHot('No')">No</button>
-                        <button id="hotSi" class="control-toggle-btn" onclick="setHot('Si')">💗 HOT</button>
+                        <button id="hotNo" class="control-toggle-btn active" onclick="toggleHot('No')">No</button>
+                        <button id="hotSi" class="control-toggle-btn" onclick="toggleHot('Si')">💗 HOT</button>
                     </div>
+                </div>
+
+                <!-- SIP Level -->
+                <div class="control-group">
+                    <div class="control-label">SIP Level</div>
+                    <select id="sipSelect" class="control-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="green">🟢 GREEN • SIP 1</option>
+                        <option value="yellow">🟡 YELLOW • SIP 2</option>
+                        <option value="red">🔴 RED • SIP 3</option>
+                        <option value="black">⚫ BLACK • SIP 4</option>
+                    </select>
                 </div>
             </div>
 
             <div class="control-row">
-                <!-- Amara Mensaje -->
-                <div class="control-group" style="flex: 2;">
-                    <div class="control-label">Amara • Mensaje</div>
-                    <input type="text" id="amaraMensaje" class="control-input" placeholder="Escribe un mensaje...">
+                <!-- Mensaje Diario Diego -->
+                <div class="control-group">
+                    <div class="control-label">Diego • Mensaje Diario</div>
+                    <input type="text" id="diegoMensaje" class="control-input" placeholder="Mensaje de Diego...">
                 </div>
-                <div class="control-group" style="flex: 0; display: flex; align-items: flex-end;">
-                    <button class="control-btn control-btn-pink" onclick="enviarMensaje()">Enviar</button>
+            </div>
+
+            <div class="control-row">
+                <!-- Mensaje Diario Amara -->
+                <div class="control-group">
+                    <div class="control-label">Amara • Mensaje Diario</div>
+                    <input type="text" id="amaraMensaje" class="control-input" placeholder="Mensaje de Amara...">
                 </div>
+            </div>
+
+            <div class="control-row" style="justify-content: center; margin-top: 10px;">
+                <button class="control-btn" onclick="enviarTodo()" style="padding: 12px 30px; font-size: 12px;">ENVIAR CAMBIOS</button>
             </div>
 
             <div class="control-status" id="controlStatus"></div>
@@ -1556,10 +1577,58 @@
                     });
             }
 
+            // Cargar SIP Level desde Diego A3
+            function loadSipLevel() {
+                var url = 'https://docs.google.com/spreadsheets/d/' + DIEGO_SHEET_ID + '/gviz/tq?tqx=out:csv&range=A3';
+                
+                fetch(url)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var sip = data.replace(/"/g, '').trim().toLowerCase();
+                        var alertLevel = document.querySelector('.alert-level');
+                        var alertDot = document.querySelector('.alert-dot');
+                        var alertText = document.querySelector('.alert-text');
+                        
+                        if (sip === 'green') {
+                            alertLevel.style.backgroundColor = '#0a2a0a';
+                            alertLevel.style.borderColor = '#00ff00';
+                            alertDot.style.backgroundColor = '#00ff00';
+                            alertDot.style.boxShadow = '0 0 8px #00ff00';
+                            alertText.style.color = '#00ff00';
+                            alertText.textContent = '⚠ ALERT LEVEL: GREEN • SIP 1';
+                        } else if (sip === 'yellow') {
+                            alertLevel.style.backgroundColor = '#2a2a0a';
+                            alertLevel.style.borderColor = '#ffcc00';
+                            alertDot.style.backgroundColor = '#ffcc00';
+                            alertDot.style.boxShadow = '0 0 8px #ffcc00';
+                            alertText.style.color = '#ffcc00';
+                            alertText.textContent = '⚠ ALERT LEVEL: YELLOW • SIP 2';
+                        } else if (sip === 'red') {
+                            alertLevel.style.backgroundColor = '#2a0a0a';
+                            alertLevel.style.borderColor = '#ff3333';
+                            alertDot.style.backgroundColor = '#ff3333';
+                            alertDot.style.boxShadow = '0 0 8px #ff3333';
+                            alertText.style.color = '#ff3333';
+                            alertText.textContent = '⚠ ALERT LEVEL: RED • SIP 3';
+                        } else if (sip === 'black') {
+                            alertLevel.style.backgroundColor = '#1a1a1a';
+                            alertLevel.style.borderColor = '#ffffff';
+                            alertDot.style.backgroundColor = '#ffffff';
+                            alertDot.style.boxShadow = '0 0 8px #ffffff';
+                            alertText.style.color = '#ffffff';
+                            alertText.textContent = '⚠ ALERT LEVEL: BLACK • SIP 4';
+                        }
+                    })
+                    .catch(function() {
+                        // Silently fail
+                    });
+            }
+
             loadStatus(DIEGO_SHEET_ID, 'diegoStatusDot', 'diegoStatusText', 'diego');
             loadStatus(AMARA_SHEET_ID, 'amaraStatusDot', 'amaraStatusText', 'amara');
             loadHotStatus();
             loadBriefing();
+            loadSipLevel();
 
             // Relojes
             function updateClocks() {
@@ -1736,61 +1805,71 @@
             }, 3000);
         }
 
-        function enviarEstado(persona, campo, valor) {
-            if (!valor) return;
-            
-            showStatus('Enviando...');
-            
+        var pendingHot = null;
+
+        function enviarEstado(persona, campo, valor, callback) {
             var url = API_URL + '?pass=' + PASSWORD + '&persona=' + persona + '&campo=' + campo + '&valor=' + encodeURIComponent(valor);
             
             fetch(url)
                 .then(function(response) { return response.json(); })
                 .then(function(data) {
-                    if (data.success) {
-                        showStatus('✓ ' + persona.toUpperCase() + ' actualizado');
-                        // Recargar estados
-                        setTimeout(function() { location.reload(); }, 1000);
-                    } else {
-                        showStatus('Error: ' + data.error, true);
-                    }
+                    if (callback) callback(data.success);
                 })
                 .catch(function(error) {
-                    showStatus('Error de conexión', true);
+                    if (callback) callback(false);
                 });
         }
 
-        // Diego select change
-        document.getElementById('diegoSelect').addEventListener('change', function() {
-            enviarEstado('diego', 'estado', this.value);
-        });
-
-        // Amara select change
-        document.getElementById('amaraSelect').addEventListener('change', function() {
-            enviarEstado('amara', 'estado', this.value);
-        });
-
-        // Hot toggle
-        function setHot(valor) {
+        // Hot toggle - solo cambia visual, no envía
+        function toggleHot(valor) {
+            pendingHot = valor;
             document.getElementById('hotNo').className = 'control-toggle-btn' + (valor === 'No' ? ' active' : '');
             document.getElementById('hotSi').className = 'control-toggle-btn' + (valor === 'Si' ? ' active' : '');
-            enviarEstado('amara', 'hot', valor);
         }
 
-        // Mensaje
-        function enviarMensaje() {
-            var mensaje = document.getElementById('amaraMensaje').value;
-            if (mensaje) {
-                enviarEstado('amara', 'mensaje', mensaje);
-                document.getElementById('amaraMensaje').value = '';
+        // Enviar todo al pulsar el botón
+        function enviarTodo() {
+            var diegoEstado = document.getElementById('diegoSelect').value;
+            var amaraEstado = document.getElementById('amaraSelect').value;
+            var diegoMensaje = document.getElementById('diegoMensaje').value;
+            var amaraMensaje = document.getElementById('amaraMensaje').value;
+            var sipLevel = document.getElementById('sipSelect').value;
+            
+            var envios = [];
+            
+            if (diegoEstado) envios.push({persona: 'diego', campo: 'estado', valor: diegoEstado});
+            if (amaraEstado) envios.push({persona: 'amara', campo: 'estado', valor: amaraEstado});
+            if (pendingHot) envios.push({persona: 'amara', campo: 'hot', valor: pendingHot});
+            if (diegoMensaje) envios.push({persona: 'diego', campo: 'mensaje', valor: diegoMensaje});
+            if (amaraMensaje) envios.push({persona: 'amara', campo: 'mensaje', valor: amaraMensaje});
+            if (sipLevel) envios.push({persona: 'diego', campo: 'sip', valor: sipLevel});
+            
+            if (envios.length === 0) {
+                showStatus('No hay cambios para enviar', true);
+                return;
             }
+            
+            showStatus('Enviando ' + envios.length + ' cambios...');
+            
+            var completados = 0;
+            var errores = 0;
+            
+            envios.forEach(function(envio) {
+                enviarEstado(envio.persona, envio.campo, envio.valor, function(success) {
+                    completados++;
+                    if (!success) errores++;
+                    
+                    if (completados === envios.length) {
+                        if (errores === 0) {
+                            showStatus('✓ Todos los cambios enviados');
+                            setTimeout(function() { location.reload(); }, 1500);
+                        } else {
+                            showStatus('Enviados con ' + errores + ' errores', true);
+                        }
+                    }
+                });
+            });
         }
-
-        // Enter key for mensaje
-        document.getElementById('amaraMensaje').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                enviarMensaje();
-            }
-        });
     </script>
 </body>
 </html>
