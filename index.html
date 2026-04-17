@@ -944,6 +944,143 @@
             color: #444444;
             letter-spacing: 1px;
         }
+
+        /* Control Panel Styles */
+        .control-panel {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+        }
+
+        .control-panel-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            color: #00ff00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .control-row {
+            display: -webkit-box;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .control-group {
+            flex: 1;
+        }
+
+        .control-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #777777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .control-select {
+            width: 100%;
+            padding: 8px;
+            background-color: #0a0a0a;
+            border: 1px solid #444444;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .control-select:focus {
+            outline: none;
+            border-color: #00ff00;
+        }
+
+        .control-input {
+            width: 100%;
+            padding: 8px;
+            background-color: #0a0a0a;
+            border: 1px solid #444444;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            box-sizing: border-box;
+        }
+
+        .control-input:focus {
+            outline: none;
+            border-color: #00ff00;
+        }
+
+        .control-btn {
+            padding: 8px 15px;
+            background-color: #1a3a1a;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .control-btn:active {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
+        .control-btn-pink {
+            background-color: #3a1a2a;
+            border: 1px solid #ff6b8a;
+            color: #ff6b8a;
+        }
+
+        .control-btn-pink:active {
+            background-color: #ff6b8a;
+            color: #000000;
+        }
+
+        .control-status {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            color: #00ff00;
+            text-align: center;
+            margin-top: 8px;
+            min-height: 14px;
+        }
+
+        .control-status-error {
+            color: #ff3333;
+        }
+
+        .control-toggle {
+            display: -webkit-box;
+            display: flex;
+            gap: 5px;
+        }
+
+        .control-toggle-btn {
+            flex: 1;
+            padding: 6px;
+            background-color: #0a0a0a;
+            border: 1px solid #444444;
+            color: #777777;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .control-toggle-btn.active {
+            background-color: #ff6b8a;
+            border-color: #ff6b8a;
+            color: #000000;
+        }
     </style>
 </head>
 <body>
@@ -1142,6 +1279,62 @@
         <footer class="footer">
             SINCE 20 NOV 2025 • UNCLASSIFIED
         </footer>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="control-panel-title">▌ Panel de Control ▌</div>
+            
+            <div class="control-row">
+                <!-- Diego Status -->
+                <div class="control-group">
+                    <div class="control-label">Diego • Estado</div>
+                    <select id="diegoSelect" class="control-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="Operativo">🟢 Operativo</option>
+                        <option value="Trabajando">🟡 Trabajando</option>
+                        <option value="Bunker">🔴 Bunker</option>
+                    </select>
+                </div>
+                
+                <!-- Amara Status -->
+                <div class="control-group">
+                    <div class="control-label">Amara • Ánimo</div>
+                    <select id="amaraSelect" class="control-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="Bien">🟢 Bien</option>
+                        <option value="Regular">🟡 Regular</option>
+                        <option value="Mal">🔴 Mal</option>
+                        <option value="Hambrienta">🟠 Hambrienta</option>
+                        <option value="Cansada">⚪ Cansada</option>
+                        <option value="Triste">🔵 Triste</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <!-- Amara Hot Toggle -->
+                <div class="control-group">
+                    <div class="control-label">Amara • Hot</div>
+                    <div class="control-toggle">
+                        <button id="hotNo" class="control-toggle-btn active" onclick="setHot('No')">No</button>
+                        <button id="hotSi" class="control-toggle-btn" onclick="setHot('Si')">💗 HOT</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <!-- Amara Mensaje -->
+                <div class="control-group" style="flex: 2;">
+                    <div class="control-label">Amara • Mensaje</div>
+                    <input type="text" id="amaraMensaje" class="control-input" placeholder="Escribe un mensaje...">
+                </div>
+                <div class="control-group" style="flex: 0; display: flex; align-items: flex-end;">
+                    <button class="control-btn control-btn-pink" onclick="enviarMensaje()">Enviar</button>
+                </div>
+            </div>
+
+            <div class="control-status" id="controlStatus"></div>
+        </div>
     </div>
 
     <script>
@@ -1527,6 +1720,77 @@
                     });
             });
         }
+    </script>
+
+    <!-- Control Panel Functions -->
+    <script>
+        var API_URL = 'https://script.google.com/macros/s/AKfycbzRlf3ZRBr7vFPr_YFLSDR-e_a95kJIfu1f006ww31UhHvYAxAVz12jQom8fWeLGQuM/exec';
+        var PASSWORD = 'lhxliv2025';
+
+        function showStatus(msg, isError) {
+            var statusEl = document.getElementById('controlStatus');
+            statusEl.textContent = msg;
+            statusEl.className = 'control-status' + (isError ? ' control-status-error' : '');
+            setTimeout(function() {
+                statusEl.textContent = '';
+            }, 3000);
+        }
+
+        function enviarEstado(persona, campo, valor) {
+            if (!valor) return;
+            
+            showStatus('Enviando...');
+            
+            var url = API_URL + '?pass=' + PASSWORD + '&persona=' + persona + '&campo=' + campo + '&valor=' + encodeURIComponent(valor);
+            
+            fetch(url)
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        showStatus('✓ ' + persona.toUpperCase() + ' actualizado');
+                        // Recargar estados
+                        setTimeout(function() { location.reload(); }, 1000);
+                    } else {
+                        showStatus('Error: ' + data.error, true);
+                    }
+                })
+                .catch(function(error) {
+                    showStatus('Error de conexión', true);
+                });
+        }
+
+        // Diego select change
+        document.getElementById('diegoSelect').addEventListener('change', function() {
+            enviarEstado('diego', 'estado', this.value);
+        });
+
+        // Amara select change
+        document.getElementById('amaraSelect').addEventListener('change', function() {
+            enviarEstado('amara', 'estado', this.value);
+        });
+
+        // Hot toggle
+        function setHot(valor) {
+            document.getElementById('hotNo').className = 'control-toggle-btn' + (valor === 'No' ? ' active' : '');
+            document.getElementById('hotSi').className = 'control-toggle-btn' + (valor === 'Si' ? ' active' : '');
+            enviarEstado('amara', 'hot', valor);
+        }
+
+        // Mensaje
+        function enviarMensaje() {
+            var mensaje = document.getElementById('amaraMensaje').value;
+            if (mensaje) {
+                enviarEstado('amara', 'mensaje', mensaje);
+                document.getElementById('amaraMensaje').value = '';
+            }
+        }
+
+        // Enter key for mensaje
+        document.getElementById('amaraMensaje').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                enviarMensaje();
+            }
+        });
     </script>
 </body>
 </html>
