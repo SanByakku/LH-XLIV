@@ -2,21 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- PWA -->
     <link rel="manifest" href="/LH-XLIV/manifest.json">
     <link rel="apple-touch-icon" href="/LH-XLIV/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/LH-XLIV/icons/icon-192.png">
     
+    <!-- iOS/Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="LHXLIV">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Chrome/Android -->
     <meta name="theme-color" content="#111111">
+    <meta name="msapplication-TileColor" content="#111111">
+    
     <title>LHXLIV</title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            -webkit-box-sizing: border-box;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
@@ -27,9 +36,23 @@
             color: #dddddd;
             min-height: 100vh;
             padding: 20px 15px;
-            padding-top: max(20px, env(safe-area-inset-top));
-            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            /* Fallback for browsers without env() support */
+            padding-top: 20px;
+            padding-bottom: 20px;
+            /* iOS Safari safe area */
+            padding-top: constant(safe-area-inset-top, 20px);
+            padding-top: env(safe-area-inset-top, 20px);
+            padding-bottom: constant(safe-area-inset-bottom, 20px);
+            padding-bottom: env(safe-area-inset-bottom, 20px);
             position: relative;
+        }
+
+        /* Safari/iOS additional support */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            body {
+                padding-top: max(20px, env(safe-area-inset-top));
+                padding-bottom: max(20px, env(safe-area-inset-bottom));
+            }
         }
 
         /* Scanlines effect */
@@ -417,6 +440,7 @@
             padding: 12px;
             padding-left: 50px;
             margin-bottom: 10px;
+            background: -webkit-linear-gradient(315deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
             border: 1px solid #ff6b8a;
             border-left: 3px solid #ff6b8a;
@@ -424,6 +448,7 @@
         }
 
         .briefing-box-diego {
+            background: -webkit-linear-gradient(315deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
             border: 1px solid #7ec8e3;
             border-left: 3px solid #7ec8e3;
@@ -433,12 +458,19 @@
             position: absolute;
             left: 10px;
             top: 50%;
+            -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
             width: 30px;
             height: 30px;
             border-radius: 50%;
+            display: -webkit-box;
+            display: -webkit-flex;
             display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
             align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
             justify-content: center;
             font-family: 'Courier New', Courier, monospace;
             font-size: 14px;
@@ -448,18 +480,26 @@
         .briefing-avatar-amara {
             background-color: #ff6b8a;
             color: #000000;
+            -webkit-box-shadow: 0 0 8px #ff6b8a;
             box-shadow: 0 0 8px #ff6b8a;
         }
 
         .briefing-avatar-diego {
             background-color: #7ec8e3;
             color: #000000;
+            -webkit-box-shadow: 0 0 8px #7ec8e3;
             box-shadow: 0 0 8px #7ec8e3;
         }
 
         .briefing-header {
+            display: -webkit-box;
+            display: -webkit-flex;
             display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
             justify-content: space-between;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
             align-items: center;
             margin-bottom: 6px;
         }
