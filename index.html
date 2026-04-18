@@ -1172,6 +1172,69 @@
         }
 
         /* Mood Meter Styles */
+        .mood-panel {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .mood-compact {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+
+        .mood-compact-header {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .mood-compact-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #777777;
+            letter-spacing: 1px;
+        }
+
+        .mood-compact-value {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .mood-save-btn {
+            padding: 8px 12px;
+            background-color: #1a2a1a;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .mood-save-btn:active {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
         .mood-section {
             margin-top: 15px;
             padding: 15px;
@@ -1385,6 +1448,25 @@
                     <span class="status-text" id="amaraStatusText">CARGANDO...</span>
                 </div>
             </div>
+        </div>
+
+        <!-- Mood Meters (compartidos) -->
+        <div class="mood-panel">
+            <div class="mood-compact">
+                <div class="mood-compact-header">
+                    <span class="mood-compact-label">🔵 Diego</span>
+                    <span class="mood-compact-value" id="diegoMoodDisplay">--</span>
+                </div>
+                <input type="range" min="1" max="10" value="5" class="mood-slider mood-slider-diego" id="diegoMoodSlider" oninput="updateMoodValue('diego', this.value)">
+            </div>
+            <div class="mood-compact">
+                <div class="mood-compact-header">
+                    <span class="mood-compact-label">🩷 Amara</span>
+                    <span class="mood-compact-value" id="amaraMoodDisplay">--</span>
+                </div>
+                <input type="range" min="1" max="10" value="5" class="mood-slider mood-slider-amara" id="amaraMoodSlider" oninput="updateMoodValue('amara', this.value)">
+            </div>
+            <button class="mood-save-btn" onclick="enviarMood()">💾 GUARDAR</button>
         </div>
 
         <!-- Hot status box - solo aparece si B2 = si/hot -->
@@ -1613,46 +1695,6 @@
             </div>
 
             <div class="control-status" id="controlStatus"></div>
-        </div>
-
-        <!-- Mood Meter Section -->
-        <div class="mood-section">
-            <div class="mood-section-title">▌ Medidor de Ánimo ▌</div>
-            
-            <!-- Diego Mood -->
-            <div class="mood-meter">
-                <div class="mood-meter-header">
-                    <span class="mood-meter-label"><span class="mood-emoji">🔵</span> Diego</span>
-                    <span class="mood-meter-value mood-meter-value-diego" id="diegoMoodValue">5</span>
-                </div>
-                <div class="mood-slider-container">
-                    <input type="range" min="1" max="10" value="5" class="mood-slider mood-slider-diego" id="diegoMoodSlider" oninput="updateMoodValue('diego', this.value)">
-                </div>
-                <div class="mood-labels">
-                    <span>😢 1</span>
-                    <span>😐 5</span>
-                    <span>😊 10</span>
-                </div>
-            </div>
-
-            <!-- Amara Mood -->
-            <div class="mood-meter">
-                <div class="mood-meter-header">
-                    <span class="mood-meter-label"><span class="mood-emoji">🩷</span> Amara</span>
-                    <span class="mood-meter-value mood-meter-value-amara" id="amaraMoodValue">5</span>
-                </div>
-                <div class="mood-slider-container">
-                    <input type="range" min="1" max="10" value="5" class="mood-slider mood-slider-amara" id="amaraMoodSlider" oninput="updateMoodValue('amara', this.value)">
-                </div>
-                <div class="mood-labels">
-                    <span>😢 1</span>
-                    <span>😐 5</span>
-                    <span>💕 10</span>
-                </div>
-            </div>
-
-            <button class="mood-btn" onclick="enviarMood()">📊 REGISTRAR ÁNIMO</button>
-            <div class="mood-status" id="moodStatus"></div>
         </div>
     </div>
 
@@ -1976,6 +2018,36 @@
                     });
             }
 
+            // Cargar mood actual desde A5 y B5
+            function loadMoodValues() {
+                var urlDiego = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&range=A5';
+                var urlAmara = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&range=B5';
+                
+                fetch(urlDiego)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var mood = data.replace(/"/g, '').trim();
+                        var num = parseInt(mood);
+                        if (num >= 1 && num <= 10) {
+                            document.getElementById('diegoMoodSlider').value = num;
+                            updateMoodDisplay('diego', num);
+                        }
+                    })
+                    .catch(function() {});
+                
+                fetch(urlAmara)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var mood = data.replace(/"/g, '').trim();
+                        var num = parseInt(mood);
+                        if (num >= 1 && num <= 10) {
+                            document.getElementById('amaraMoodSlider').value = num;
+                            updateMoodDisplay('amara', num);
+                        }
+                    })
+                    .catch(function() {});
+            }
+
             // Diego en A1, Amara en B1
             loadStatus('A1', 'diegoStatusDot', 'diegoStatusText', 'diego');
             loadStatus('B1', 'amaraStatusDot', 'amaraStatusText', 'amara');
@@ -1983,6 +2055,7 @@
             loadDiegoBriefing();
             loadAmaraBriefing();
             loadSipLevel();
+            loadMoodValues();
 
             // Relojes
             function updateClocks() {
@@ -2226,33 +2299,33 @@
         }
 
         // Mood Meter Functions
-        function updateMoodValue(persona, value) {
-            var emoji = '';
-            var num = parseInt(value);
-            
-            if (num <= 2) emoji = '😢';
-            else if (num <= 4) emoji = '😕';
-            else if (num <= 6) emoji = '😐';
-            else if (num <= 8) emoji = '🙂';
-            else emoji = '😊';
-            
-            document.getElementById(persona + 'MoodValue').textContent = emoji + ' ' + value;
+        function getEmoji(num) {
+            if (num <= 2) return '😢';
+            if (num <= 4) return '😕';
+            if (num <= 6) return '😐';
+            if (num <= 8) return '🙂';
+            return '😊';
         }
 
-        function showMoodStatus(msg, isError) {
-            var statusEl = document.getElementById('moodStatus');
-            statusEl.textContent = msg;
-            statusEl.style.color = isError ? '#ff3333' : '#00ff00';
-            setTimeout(function() {
-                statusEl.textContent = '';
-            }, 3000);
+        function updateMoodValue(persona, value) {
+            var num = parseInt(value);
+            var emoji = getEmoji(num);
+            document.getElementById(persona + 'MoodDisplay').textContent = emoji + ' ' + value + '/10';
+        }
+
+        function updateMoodDisplay(persona, value) {
+            var num = parseInt(value);
+            var emoji = getEmoji(num);
+            document.getElementById(persona + 'MoodDisplay').textContent = emoji + ' ' + value + '/10';
         }
 
         function enviarMood() {
             var diegoMood = document.getElementById('diegoMoodSlider').value;
             var amaraMood = document.getElementById('amaraMoodSlider').value;
+            var btn = document.querySelector('.mood-save-btn');
             
-            showMoodStatus('Registrando ánimo...');
+            btn.textContent = '⏳ GUARDANDO...';
+            btn.disabled = true;
             
             var url = API_URL + '?pass=' + PASSWORD + '&persona=mood&campo=registro&diegoMood=' + diegoMood + '&amaraMood=' + amaraMood;
             
@@ -2260,19 +2333,39 @@
                 .then(function(response) { return response.json(); })
                 .then(function(data) {
                     if (data.success) {
-                        showMoodStatus('✓ Ánimo registrado: Diego ' + diegoMood + '/10, Amara ' + amaraMood + '/10');
+                        btn.textContent = '✓ GUARDADO';
+                        btn.style.backgroundColor = '#0a3a0a';
+                        setTimeout(function() {
+                            btn.textContent = '💾 GUARDAR';
+                            btn.style.backgroundColor = '#1a2a1a';
+                            btn.disabled = false;
+                        }, 2000);
                     } else {
-                        showMoodStatus('Error: ' + data.error, true);
+                        btn.textContent = '✗ ERROR';
+                        btn.style.backgroundColor = '#3a0a0a';
+                        btn.style.borderColor = '#ff3333';
+                        btn.style.color = '#ff3333';
+                        setTimeout(function() {
+                            btn.textContent = '💾 GUARDAR';
+                            btn.style.backgroundColor = '#1a2a1a';
+                            btn.style.borderColor = '#00ff00';
+                            btn.style.color = '#00ff00';
+                            btn.disabled = false;
+                        }, 2000);
                     }
                 })
                 .catch(function(error) {
-                    showMoodStatus('Error de conexión', true);
+                    btn.textContent = '✗ ERROR';
+                    setTimeout(function() {
+                        btn.textContent = '💾 GUARDAR';
+                        btn.disabled = false;
+                    }, 2000);
                 });
         }
 
-        // Inicializar valores de mood
-        updateMoodValue('diego', 5);
-        updateMoodValue('amara', 5);
+        // Inicializar valores de mood (se sobrescribirán al cargar del Sheet)
+        updateMoodDisplay('diego', 5);
+        updateMoodDisplay('amara', 5);
     </script>
 </body>
 </html>
