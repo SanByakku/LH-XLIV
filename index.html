@@ -421,6 +421,1927 @@
             border-left: 3px solid #ff6b8a;
         }
 
+        .briefing-box-diego {
+            background-color: #151a20;
+            border: 1px solid #7ec8e3;
+            border-left: 3px solid #7ec8e3;
+        }
+
+        .briefing-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #ff6b8a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .briefing-text {
+            font-size: 12px;
+            color: #dddddd;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Tactical Map Styles */
+        .tactical-map {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            background-color: #0a1a0a;
+            border: 1px solid #1a3a1a;
+            overflow: hidden;
+        }
+
+        .map-world {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .map-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.08) 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+
+        .map-label {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #00ff00;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .map-coords {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 7px;
+            color: #006600;
+            text-align: right;
+            z-index: 10;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .map-line {
+            stroke: #00ff00;
+            stroke-width: 2;
+            stroke-dasharray: 8, 4;
+            fill: none;
+            -webkit-animation: dashMove 2s linear infinite;
+            animation: dashMove 2s linear infinite;
+        }
+
+        @-webkit-keyframes dashMove {
+            to { stroke-dashoffset: -24; }
+        }
+
+        @keyframes dashMove {
+            to { stroke-dashoffset: -24; }
+        }
+
+        .map-point {
+            fill: none;
+            stroke-width: 2;
+            -webkit-animation: pointPulse 2s ease-in-out infinite;
+            animation: pointPulse 2s ease-in-out infinite;
+        }
+
+        .map-point-amara {
+            stroke: #ff6b8a;
+        }
+
+        .map-point-diego {
+            stroke: #7ec8e3;
+        }
+
+        @-webkit-keyframes pointPulse {
+            0%, 100% { r: 8; opacity: 1; }
+            50% { r: 12; opacity: 0.5; }
+        }
+
+        @keyframes pointPulse {
+            0%, 100% { r: 8; opacity: 1; }
+            50% { r: 12; opacity: 0.5; }
+        }
+
+        .map-point-center {
+            -webkit-animation: none;
+            animation: none;
+        }
+
+        .map-point-center-amara {
+            fill: #ff6b8a;
+        }
+
+        .map-point-center-diego {
+            fill: #7ec8e3;
+        }
+
+        .map-point-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            fill: #ffffff;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+
+        .map-distance {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            color: #00ff00;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px 15px;
+            border: 1px solid #00ff00;
+            z-index: 10;
+        }
+
+        .clocks {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+        }
+
+        .clock {
+            text-align: center;
+        }
+
+        .clock-time {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .clock-label {
+            font-size: 8px;
+            color: #777777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .clock-flag {
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .clock-diff {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            color: #00ff00;
+            padding: 4px 8px;
+            background-color: #0d1a0d;
+            border-radius: 2px;
+        }
+
+        .matrix-section {
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            padding: 15px;
+        }
+
+        .section-header {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .section-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            color: #777777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .current-date {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            color: #999999;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #2a2a2a;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #ffffff;
+            -webkit-transition: width 0.3s;
+            transition: width 0.3s;
+        }
+
+        .dot-matrix {
+            display: -webkit-box;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: 12px;
+            max-width: 232px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #2a2a2a;
+        }
+
+        .dot-filled {
+            background-color: #ffffff;
+        }
+
+        .dot-today {
+            background-color: #999999;
+            outline: 2px solid #ffffff;
+            outline-offset: 1px;
+            -webkit-animation: pulse 2s ease-in-out infinite;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @-webkit-keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dot-amara {
+            background-color: #ff6b8a;
+        }
+
+        .dot-diego {
+            background-color: #7ec8e3;
+        }
+
+        .dot-redacted {
+            background-color: #3a3a3a;
+            position: relative;
+        }
+
+        .dot-redacted::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 140%;
+            background-color: #cc3333;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%) rotate(45deg);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .dot-redacted::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 140%;
+            background-color: #cc3333;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .stats {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 12px;
+            padding: 10px 0;
+            border-top: 1px solid #2a2a2a;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .stat-label {
+            font-size: 7px;
+            color: #777777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .visits-box {
+            text-align: center;
+            padding: 8px;
+            margin-bottom: 10px;
+            background-color: #1f1f1f;
+            border: 1px solid #2a2a2a;
+        }
+
+        .visits-text {
+            font-size: 10px;
+            color: #bbbbbb;
+        }
+
+        .visits-value {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .visits-heart {
+            color: #ff6b8a;
+        }
+
+        .countdown {
+            text-align: center;
+            padding: 8px;
+            margin-bottom: 10px;
+            background-color: #1f1f1f;
+            border: 1px solid #2a2a2a;
+        }
+
+        .countdown-text {
+            font-size: 11px;
+            color: #bbbbbb;
+        }
+
+        .countdown-highlight {
+            color: #ff6b8a;
+            font-weight: bold;
+        }
+
+        .countdown-highlight-diego {
+            color: #7ec8e3;
+            font-weight: bold;
+        }
+
+        .motivation {
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 12px;
+            background-color: #1f1f1f;
+            border-left: 3px solid #ffffff;
+        }
+
+        .motivation-text {
+            font-size: 11px;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        .birthday-message {
+            text-align: center;
+            padding: 12px;
+            margin-bottom: 12px;
+            background-color: #2a1a1f;
+            border: 1px solid #ff6b8a;
+        }
+
+        .birthday-message-diego {
+            background-color: #1a2a2f;
+            border: 1px solid #7ec8e3;
+        }
+
+        .birthday-text {
+            font-size: 13px;
+            color: #ffffff;
+        }
+
+        .birthday-emoji {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .legend {
+            display: -webkit-box;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 10px;
+        }
+
+        .legend-item {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            gap: 6px;
+            font-size: 8px;
+            color: #777777;
+            text-transform: uppercase;
+            width: 45%;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            -webkit-flex-shrink: 0;
+            flex-shrink: 0;
+        }
+
+        .legend-dot-filled {
+            background-color: #ffffff;
+        }
+
+        .legend-dot-today {
+            background-color: #999999;
+            outline: 2px solid #ffffff;
+            outline-offset: 1px;
+        }
+
+        .legend-dot-amara {
+            background-color: #ff6b8a;
+        }
+
+        .legend-dot-diego {
+            background-color: #7ec8e3;
+        }
+
+        .legend-dot-redacted {
+            background-color: #3a3a3a;
+            position: relative;
+        }
+
+        .legend-dot-redacted::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 140%;
+            background-color: #cc3333;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%) rotate(45deg);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .legend-dot-redacted::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 140%;
+            background-color: #cc3333;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .footer {
+            margin-top: 12px;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #444444;
+            letter-spacing: 1px;
+        }
+
+        /* Control Panel Styles */
+        .control-panel {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+        }
+
+        .control-panel-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            color: #00ff00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .control-row {
+            display: -webkit-box;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .control-group {
+            flex: 1;
+        }
+
+        .control-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #777777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .control-select {
+            width: 100%;
+            padding: 8px;
+            background-color: #0a0a0a;
+            border: 1px solid #444444;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .control-select:focus {
+            outline: none;
+            border-color: #00ff00;
+        }
+
+        .control-input {
+            width: 100%;
+            padding: 8px;
+            background-color: #0a0a0a;
+            border: 1px solid #444444;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            box-sizing: border-box;
+        }
+
+        .control-input:focus {
+            outline: none;
+            border-color: #00ff00;
+        }
+
+        .control-btn {
+            padding: 8px 15px;
+            background-color: #1a3a1a;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .control-btn:active {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
+        .control-btn-pink {
+            background-color: #3a1a2a;
+            border: 1px solid #ff6b8a;
+            color: #ff6b8a;
+        }
+
+        .control-btn-pink:active {
+            background-color: #ff6b8a;
+            color: #000000;
+        }
+
+        .control-status {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            color: #00ff00;
+            text-align: center;
+            margin-top: 8px;
+            min-height: 14px;
+        }
+
+        .control-status-error {
+            color: #ff3333;
+        }
+
+        .control-toggle {
+            display: -webkit-box;
+            display: flex;
+            gap: 5px;
+        }
+
+        .control-toggle-btn {
+            flex: 1;
+            padding: 6px;
+            background-color: #0a0a0a;
+            border: 1px solid #444444;
+            color: #777777;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .control-toggle-btn.active {
+            background-color: #ff6b8a;
+            border-color: #ff6b8a;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <div class="signal-bars" id="signalBars">
+                    <div class="signal-bar"></div>
+                    <div class="signal-bar"></div>
+                    <div class="signal-bar"></div>
+                    <div class="signal-bar"></div>
+                </div>
+                <span class="link-status" id="linkStatus">LINK ACTIVE</span>
+            </div>
+            <span class="timestamp" id="lastSync">LAST SYNC: --:--:--</span>
+        </div>
+
+        <div class="alert-level">
+            <div class="alert-dot"></div>
+            <span class="alert-text">⚠ ALERT LEVEL: YELLOW • SIP 2</span>
+        </div>
+        
+        <div class="dashboard-title">▌ OPERATIONAL DASHBOARD ▌</div>
+
+        <div class="mission-time">
+            <div class="mission-time-item">
+                <div class="mission-time-value" id="missionHours">--</div>
+                <div class="mission-time-label">Horas</div>
+            </div>
+            <div class="mission-time-item">
+                <div class="mission-time-value" id="missionDays">--</div>
+                <div class="mission-time-label">Días</div>
+            </div>
+            <div class="mission-time-item">
+                <div class="mission-time-value" id="missionWeeks">--</div>
+                <div class="mission-time-label">Semanas</div>
+            </div>
+        </div>
+
+        <header class="header">
+            <div class="flags">🇺🇳 🇱🇧</div>
+            <h1 class="mission-id">LHXLIV</h1>
+            <p class="mission-subtitle">Libre Hidalgo XLIV</p>
+            <p class="daily-quote" id="dailyQuote"></p>
+        </header>
+
+        <div class="status-panel">
+            <div class="status-box">
+                <div class="status-label">Diego • Estado</div>
+                <div class="status-indicator">
+                    <div class="status-dot status-dot-green" id="diegoStatusDot"></div>
+                    <span class="status-text" id="diegoStatusText">CARGANDO...</span>
+                </div>
+            </div>
+            <div class="status-box">
+                <div class="status-label">Amara • Ánimo</div>
+                <div class="status-indicator">
+                    <div class="status-dot status-dot-green" id="amaraStatusDot"></div>
+                    <span class="status-text" id="amaraStatusText">CARGANDO...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hot status box - solo aparece si A2 = si/hot -->
+        <div class="hot-box" id="hotBox" style="display: none;">
+            <span class="hot-text">💗 HOT 💗</span>
+        </div>
+
+        <!-- Mensaje de Diego -->
+        <div class="briefing-box briefing-box-diego" id="diegoBriefingBox" style="display: none;">
+            <div class="briefing-label" style="color: #7ec8e3;">📡 Mensaje de Diego</div>
+            <div class="briefing-text" id="diegoBriefingText"></div>
+        </div>
+
+        <!-- Mensaje de Amara -->
+        <div class="briefing-box" id="amaraBriefingBox" style="display: none;">
+            <div class="briefing-label">♡ Mensaje de Amara</div>
+            <div class="briefing-text" id="amaraBriefingText"></div>
+        </div>
+
+        <!-- Tactical Map - Mediterranean Region (Real Image) -->
+        <div class="tactical-map">
+            <!-- Real satellite map image -->
+            <img src="/LH-XLIV/map-mediterranean.png" alt="Mediterranean Map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+            
+            <div class="map-grid"></div>
+            <div class="map-label">TACTICAL OVERVIEW</div>
+            <div class="map-coords">
+                AMARA 41.76°N 4.71°W<br>
+                DIEGO 33.36°N 35.59°E
+            </div>
+            
+            <!-- AMARA point - positioned with percentages (easy to adjust) -->
+            <!-- left: 0% = borde izquierdo, 100% = borde derecho -->
+            <!-- top: 0% = arriba, 100% = abajo -->
+            <div style="position: absolute; left: 18%; top: 46%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
+                <div style="font-family: 'Courier New', monospace; font-size: 9px; color: #ffffff; font-weight: bold; margin-bottom: 4px;">AMARA</div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #ff6b8a; margin: 0 auto; display: flex; align-items: center; justify-content: center; animation: pointPulse 2s ease-in-out infinite;">
+                    <div style="width: 6px; height: 6px; border-radius: 50%; background-color: #ff6b8a;"></div>
+                </div>
+            </div>
+            
+            <!-- DIEGO point - positioned with percentages -->
+            <div style="position: absolute; left: 68%; top: 70%; transform: translate(-50%, -50%); z-index: 10; text-align: center;">
+                <div style="font-family: 'Courier New', monospace; font-size: 9px; color: #ffffff; font-weight: bold; margin-bottom: 4px;">DIEGO</div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #7ec8e3; margin: 0 auto; display: flex; align-items: center; justify-content: center; animation: pointPulse 2s ease-in-out infinite;">
+                    <div style="width: 6px; height: 6px; border-radius: 50%; background-color: #7ec8e3;"></div>
+                </div>
+            </div>
+            
+            <!-- Connection line SVG - smooth curve -->
+            <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M 18 46 Q 43 30, 68 70" 
+                      stroke="#00ff00" 
+                      stroke-width="0.4" 
+                      stroke-dasharray="2,1" 
+                      fill="none"
+                      style="animation: dashMove 2s linear infinite;"/>
+            </svg>
+            
+            <div class="map-distance">3.680 KM</div>
+        </div>
+
+        <div class="clocks">
+            <div class="clock">
+                <div class="clock-flag">🇪🇸</div>
+                <div class="clock-time" id="clockSpain">--:--</div>
+                <div class="clock-label">España</div>
+            </div>
+            <div class="clock-diff" id="clockDiff">+0H</div>
+            <div class="clock">
+                <div class="clock-flag">🇱🇧</div>
+                <div class="clock-time" id="clockLebanon">--:--</div>
+                <div class="clock-label">Líbano</div>
+            </div>
+        </div>
+
+        <section class="matrix-section">
+            <div class="section-header">
+                <span class="section-title">Registro de misión</span>
+                <span class="current-date" id="currentDate"></span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="dot-matrix" id="dotMatrix"></div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="statCompleted">--</div>
+                    <div class="stat-label">Días en ZO</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="statWeeks">--</div>
+                    <div class="stat-label">Semanas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="statPercent">--%</div>
+                    <div class="stat-label">Progreso</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" style="color: #ff6b8a;">UNK</div>
+                    <div class="stat-label">Coitos Pendientes</div>
+                </div>
+            </div>
+
+            <div class="visits-box" id="visitsBox"></div>
+
+            <div class="countdown" id="countdown"></div>
+
+            <div id="birthdayMessage"></div>
+
+            <div class="motivation">
+                <p class="motivation-text" id="motivationText"></p>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot legend-dot-filled"></div>
+                    <span>Completado</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot legend-dot-today"></div>
+                    <span>Hoy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot legend-dot-amara"></div>
+                    <span>Amara ♡</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot legend-dot-diego"></div>
+                    <span>Diego</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot legend-dot-redacted"></div>
+                    <span>Clasificado</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            SINCE 20 NOV 2025 • UNCLASSIFIED
+        </footer>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="control-panel-title">▌ Panel de Control ▌</div>
+            
+            <div class="control-row">
+                <!-- Diego Status -->
+                <div class="control-group">
+                    <div class="control-label">Diego • Estado</div>
+                    <select id="diegoSelect" class="control-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="Operativo">🟢 Operativo</option>
+                        <option value="Trabajando">🟡 Trabajando</option>
+                        <option value="Bunker">🔴 Bunker</option>
+                    </select>
+                </div>
+                
+                <!-- Amara Status -->
+                <div class="control-group">
+                    <div class="control-label">Amara • Ánimo</div>
+                    <select id="amaraSelect" class="control-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="Bien">🟢 Bien</option>
+                        <option value="Regular">🟡 Regular</option>
+                        <option value="Mal">🔴 Mal</option>
+                        <option value="Hambrienta">🟠 Hambrienta</option>
+                        <option value="Cansada">⚪ Cansada</option>
+                        <option value="Triste">🔵 Triste</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <!-- Amara Hot Toggle -->
+                <div class="control-group">
+                    <div class="control-label">Amara • Hot</div>
+                    <div class="control-toggle">
+                        <button id="hotNo" class="control-toggle-btn active" onclick="toggleHot('No')">No</button>
+                        <button id="hotSi" class="control-toggle-btn" onclick="toggleHot('Si')">💗 HOT</button>
+                    </div>
+                </div>
+
+                <!-- SIP Level -->
+                <div class="control-group">
+                    <div class="control-label">SIP Level</div>
+                    <select id="sipSelect" class="control-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="green">🟢 GREEN • SIP 1</option>
+                        <option value="yellow">🟡 YELLOW • SIP 2</option>
+                        <option value="red">🔴 RED • SIP 3</option>
+                        <option value="black">⚫ BLACK • SIP 4</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <!-- Mensaje Diario Diego -->
+                <div class="control-group">
+                    <div class="control-label">Diego • Mensaje Diario</div>
+                    <input type="text" id="diegoMensaje" class="control-input" placeholder="Mensaje de Diego...">
+                </div>
+            </div>
+
+            <div class="control-row">
+                <!-- Mensaje Diario Amara -->
+                <div class="control-group">
+                    <div class="control-label">Amara • Mensaje Diario</div>
+                    <input type="text" id="amaraMensaje" class="control-input" placeholder="Mensaje de Amara...">
+                </div>
+            </div>
+
+            <div class="control-row" style="justify-content: center; margin-top: 10px;">
+                <button class="control-btn" onclick="enviarTodo()" style="padding: 12px 30px; font-size: 12px;">ENVIAR CAMBIOS</button>
+            </div>
+
+            <div class="control-status" id="controlStatus"></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Beep sound on load
+            function playBeep() {
+                try {
+                    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    var oscillator = audioCtx.createOscillator();
+                    var gainNode = audioCtx.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+                    gainNode.gain.value = 0.1;
+                    
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.15);
+                    
+                    setTimeout(function() {
+                        var osc2 = audioCtx.createOscillator();
+                        var gain2 = audioCtx.createGain();
+                        osc2.connect(gain2);
+                        gain2.connect(audioCtx.destination);
+                        osc2.frequency.value = 1000;
+                        osc2.type = 'sine';
+                        gain2.gain.value = 0.1;
+                        osc2.start();
+                        osc2.stop(audioCtx.currentTime + 0.1);
+                    }, 150);
+                } catch(e) {}
+            }
+            
+            document.addEventListener('click', function initAudio() {
+                playBeep();
+                document.removeEventListener('click', initAudio);
+            }, { once: true });
+
+            var START = new Date(2025, 10, 20);
+            var TOTAL = 196;
+            
+            var REDACTED_START = new Date(2026, 4, 20);
+            var REDACTED_END = new Date(2026, 4, 24);
+            var AMARA = new Date(2026, 3, 27);
+            var DIEGO = new Date(2026, 4, 26);
+
+            var DIEGO_SHEET_ID = '1x2RSZw3obC1Dg7Sx8qIHwtPF1TOFiBRRJlBgRXuNBs4';
+            var AMARA_SHEET_ID = '1-iYQgzdN3rjOC5RdwKyRTcsjVVG3VWwmhkpAEQLVA54';
+
+            var QUOTES = [
+                '"Estar contigo es como estar solo"',
+                '"Un corazón feliz es un corazón tranquilo"',
+                '"Me das paz en esta guerra"'
+            ];
+            
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            var quoteIndex = dayOfYear % 3;
+            document.getElementById('dailyQuote').textContent = QUOTES[quoteIndex];
+
+            // Mission time - separate counters
+            function updateMissionTime() {
+                var now = new Date();
+                var diff = now - START;
+                
+                if (diff < 0) {
+                    document.getElementById('missionHours').textContent = '0';
+                    document.getElementById('missionDays').textContent = '0';
+                    document.getElementById('missionWeeks').textContent = '0';
+                    return;
+                }
+                
+                var totalHours = Math.floor(diff / (1000 * 60 * 60));
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var weeks = Math.floor(days / 7);
+                
+                document.getElementById('missionHours').textContent = totalHours.toLocaleString();
+                document.getElementById('missionDays').textContent = days;
+                document.getElementById('missionWeeks').textContent = weeks;
+            }
+            
+            updateMissionTime();
+            setInterval(updateMissionTime, 60000);
+
+            // Update signal bars based on Diego status
+            function updateSignalBars(status) {
+                var bars = document.querySelectorAll('.signal-bar');
+                var linkStatus = document.getElementById('linkStatus');
+                
+                bars.forEach(function(bar) {
+                    bar.className = 'signal-bar';
+                });
+                linkStatus.className = 'link-status';
+                
+                if (status === 'operativo') {
+                    bars.forEach(function(bar) { bar.classList.add('signal-bar'); });
+                    linkStatus.textContent = 'LINK ACTIVE';
+                } else if (status === 'trabajando') {
+                    bars.forEach(function(bar) { bar.classList.add('signal-bar-yellow'); });
+                    linkStatus.classList.add('link-status-yellow');
+                    linkStatus.textContent = 'LINK BUSY';
+                } else if (status === 'bunker') {
+                    bars.forEach(function(bar) { bar.classList.add('signal-bar-red'); });
+                    linkStatus.classList.add('link-status-red');
+                    linkStatus.textContent = 'LINK LIMITED';
+                }
+            }
+
+            // Cargar estados desde Google Sheets
+            function loadStatus(sheetId, dotId, textId, type) {
+                var url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv&range=A1';
+                
+                fetch(url)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var status = data.replace(/"/g, '').trim().toLowerCase();
+                        var dot = document.getElementById(dotId);
+                        var text = document.getElementById(textId);
+                        
+                        dot.className = 'status-dot';
+                        
+                        if (type === 'diego') {
+                            updateSignalBars(status);
+                            
+                            // Update last sync timestamp
+                            var now = new Date();
+                            var h = now.getHours();
+                            var m = now.getMinutes();
+                            var s = now.getSeconds();
+                            if (h < 10) h = '0' + h;
+                            if (m < 10) m = '0' + m;
+                            if (s < 10) s = '0' + s;
+                            document.getElementById('lastSync').textContent = 'LAST SYNC: ' + h + ':' + m + ':' + s;
+                            
+                            if (status === 'operativo') {
+                                dot.classList.add('status-dot-green');
+                                text.textContent = 'OPERATIVO';
+                            } else if (status === 'trabajando') {
+                                dot.classList.add('status-dot-yellow');
+                                text.textContent = 'TRABAJANDO';
+                            } else if (status === 'bunker') {
+                                dot.classList.add('status-dot-red');
+                                text.textContent = 'BUNKER';
+                            } else {
+                                dot.classList.add('status-dot-green');
+                                text.textContent = status.toUpperCase() || 'SIN DATOS';
+                            }
+                        } else {
+                            if (status === 'bien') {
+                                dot.classList.add('status-dot-green');
+                                text.textContent = 'BIEN';
+                            } else if (status === 'regular') {
+                                dot.classList.add('status-dot-yellow');
+                                text.textContent = 'REGULAR';
+                            } else if (status === 'mal') {
+                                dot.classList.add('status-dot-red');
+                                text.textContent = 'MAL';
+                            } else if (status === 'hambrienta') {
+                                dot.classList.add('status-dot-orange');
+                                text.textContent = 'HAMBRIENTA';
+                            } else if (status === 'cansada') {
+                                dot.classList.add('status-dot-gray');
+                                text.textContent = 'CANSADA';
+                            } else if (status === 'triste') {
+                                dot.classList.add('status-dot-blue');
+                                text.textContent = 'TRISTE';
+                            } else {
+                                dot.classList.add('status-dot-green');
+                                text.textContent = status.toUpperCase() || 'SIN DATOS';
+                            }
+                        }
+                    })
+                    .catch(function() {
+                        document.getElementById(textId).textContent = 'ERROR';
+                    });
+            }
+
+            // Cargar estado "Hot" de Amara desde A2
+            function loadHotStatus() {
+                var url = 'https://docs.google.com/spreadsheets/d/' + AMARA_SHEET_ID + '/gviz/tq?tqx=out:csv&range=A2';
+                
+                fetch(url)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var hotStatus = data.replace(/"/g, '').trim().toLowerCase();
+                        var hotBox = document.getElementById('hotBox');
+                        
+                        if (hotStatus === 'si' || hotStatus === 'sí' || hotStatus === 'yes' || hotStatus === 'hot') {
+                            hotBox.style.display = 'block';
+                        } else {
+                            hotBox.style.display = 'none';
+                        }
+                    })
+                    .catch(function() {
+                        // Silently fail
+                    });
+            }
+
+            // Cargar briefing de Amara desde A3
+            // Cargar mensaje de Amara desde A3
+            function loadAmaraBriefing() {
+                var url = 'https://docs.google.com/spreadsheets/d/' + AMARA_SHEET_ID + '/gviz/tq?tqx=out:csv&range=A3';
+                
+                fetch(url)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var briefing = data.replace(/"/g, '').trim();
+                        
+                        if (briefing && briefing.length > 0) {
+                            document.getElementById('amaraBriefingText').textContent = briefing;
+                            document.getElementById('amaraBriefingBox').style.display = 'block';
+                        }
+                    })
+                    .catch(function() {
+                        // Silently fail
+                    });
+            }
+
+            // Cargar mensaje de Diego desde A2
+            function loadDiegoBriefing() {
+                var url = 'https://docs.google.com/spreadsheets/d/' + DIEGO_SHEET_ID + '/gviz/tq?tqx=out:csv&range=A2';
+                
+                fetch(url)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var briefing = data.replace(/"/g, '').trim();
+                        
+                        if (briefing && briefing.length > 0) {
+                            document.getElementById('diegoBriefingText').textContent = briefing;
+                            document.getElementById('diegoBriefingBox').style.display = 'block';
+                        }
+                    })
+                    .catch(function() {
+                        // Silently fail
+                    });
+            }
+
+            // Cargar SIP Level desde Diego A3 (con fallback a yellow)
+            function loadSipLevel() {
+                var url = 'https://docs.google.com/spreadsheets/d/' + DIEGO_SHEET_ID + '/gviz/tq?tqx=out:csv&range=A3';
+                
+                fetch(url)
+                    .then(function(response) { return response.text(); })
+                    .then(function(data) {
+                        var sip = data.replace(/"/g, '').trim().toLowerCase();
+                        var alertLevel = document.querySelector('.alert-level');
+                        var alertDot = document.querySelector('.alert-dot');
+                        var alertText = document.querySelector('.alert-text');
+                        
+                        // Fallback a yellow si está vacío o no reconocido
+                        if (!sip || sip === '') {
+                            sip = 'yellow';
+                        }
+                        
+                        if (sip === 'green') {
+                            alertLevel.style.backgroundColor = '#0a2a0a';
+                            alertLevel.style.borderColor = '#00ff00';
+                            alertDot.style.backgroundColor = '#00ff00';
+                            alertDot.style.boxShadow = '0 0 8px #00ff00';
+                            alertText.style.color = '#00ff00';
+                            alertText.textContent = '⚠ ALERT LEVEL: GREEN • SIP 1';
+                        } else if (sip === 'yellow') {
+                            alertLevel.style.backgroundColor = '#2a2a0a';
+                            alertLevel.style.borderColor = '#ffcc00';
+                            alertDot.style.backgroundColor = '#ffcc00';
+                            alertDot.style.boxShadow = '0 0 8px #ffcc00';
+                            alertText.style.color = '#ffcc00';
+                            alertText.textContent = '⚠ ALERT LEVEL: YELLOW • SIP 2';
+                        } else if (sip === 'red') {
+                            alertLevel.style.backgroundColor = '#2a0a0a';
+                            alertLevel.style.borderColor = '#ff3333';
+                            alertDot.style.backgroundColor = '#ff3333';
+                            alertDot.style.boxShadow = '0 0 8px #ff3333';
+                            alertText.style.color = '#ff3333';
+                            alertText.textContent = '⚠ ALERT LEVEL: RED • SIP 3';
+                        } else if (sip === 'black') {
+                            alertLevel.style.backgroundColor = '#1a1a1a';
+                            alertLevel.style.borderColor = '#ffffff';
+                            alertDot.style.backgroundColor = '#ffffff';
+                            alertDot.style.boxShadow = '0 0 8px #ffffff';
+                            alertText.style.color = '#ffffff';
+                            alertText.textContent = '⚠ ALERT LEVEL: BLACK • SIP 4';
+                        } else {
+                            // Cualquier otro valor -> yellow por defecto
+                            alertLevel.style.backgroundColor = '#2a2a0a';
+                            alertLevel.style.borderColor = '#ffcc00';
+                            alertDot.style.backgroundColor = '#ffcc00';
+                            alertDot.style.boxShadow = '0 0 8px #ffcc00';
+                            alertText.style.color = '#ffcc00';
+                            alertText.textContent = '⚠ ALERT LEVEL: YELLOW • SIP 2';
+                        }
+                    })
+                    .catch(function() {
+                        // Silently fail - mantiene el valor por defecto del HTML
+                    });
+            }
+
+            loadStatus(DIEGO_SHEET_ID, 'diegoStatusDot', 'diegoStatusText', 'diego');
+            loadStatus(AMARA_SHEET_ID, 'amaraStatusDot', 'amaraStatusText', 'amara');
+            loadHotStatus();
+            loadDiegoBriefing();
+            loadAmaraBriefing();
+            loadSipLevel();
+
+            // Relojes
+            function updateClocks() {
+                var now = new Date();
+                
+                var spainTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+                var lebanonTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Beirut' }));
+                
+                var spainHours = spainTime.getHours();
+                var spainMins = spainTime.getMinutes();
+                var lebanonHours = lebanonTime.getHours();
+                var lebanonMins = lebanonTime.getMinutes();
+                
+                // Calculate time difference
+                var diff = lebanonHours - spainHours;
+                if (diff < 0) diff += 24;
+                document.getElementById('clockDiff').textContent = '+' + diff + 'H';
+                
+                if (spainHours < 10) spainHours = '0' + spainHours;
+                if (spainMins < 10) spainMins = '0' + spainMins;
+                if (lebanonHours < 10) lebanonHours = '0' + lebanonHours;
+                if (lebanonMins < 10) lebanonMins = '0' + lebanonMins;
+                
+                document.getElementById('clockSpain').textContent = spainHours + ':' + spainMins;
+                document.getElementById('clockLebanon').textContent = lebanonHours + ':' + lebanonMins;
+            }
+            
+            updateClocks();
+            setInterval(updateClocks, 1000);
+
+            // Contador de visitas
+            function updateVisits() {
+                var VISITS_KEY = 'lhxliv_total_visits';
+                var totalVisits = parseInt(localStorage.getItem(VISITS_KEY)) || 0;
+                
+                totalVisits = totalVisits + 1;
+                localStorage.setItem(VISITS_KEY, totalVisits);
+                
+                var visitsEl = document.getElementById('visitsBox');
+                visitsEl.innerHTML = '<span class="visits-text"><span class="visits-heart">♡</span> Visitas: <span class="visits-value">' + totalVisits + '</span></span>';
+            }
+            
+            updateVisits();
+
+            function sameDay(a, b) {
+                return a.getDate() === b.getDate() && 
+                       a.getMonth() === b.getMonth() && 
+                       a.getFullYear() === b.getFullYear();
+            }
+
+            function inRange(d, start, end) {
+                return d >= start && d <= end;
+            }
+
+            function formatDate(d) {
+                var day = d.getDate();
+                var month = d.getMonth() + 1;
+                var year = d.getFullYear();
+                if (day < 10) day = '0' + day;
+                if (month < 10) month = '0' + month;
+                return day + '/' + month + '/' + year;
+            }
+
+            function daysBetween(a, b) {
+                return Math.ceil((b - a) / (1000 * 60 * 60 * 24));
+            }
+
+            function getMotivation(percent) {
+                if (percent < 25) return 'El camino acaba de empezar. Cada día cuenta.';
+                if (percent < 50) return 'Paso a paso, día a día. Ya queda menos.';
+                if (percent < 75) return 'Más de la mitad. La cuenta atrás ha comenzado.';
+                if (percent < 90) return 'Recta final. Pronto estaremos juntos.';
+                return 'Ya casi está. Muy pronto.';
+            }
+
+            document.getElementById('currentDate').textContent = formatDate(today);
+
+            // Cuenta atrás cumpleaños
+            var countdownEl = document.getElementById('countdown');
+            var daysToAmara = daysBetween(today, AMARA);
+            var daysToDiego = daysBetween(today, DIEGO);
+
+            if (sameDay(today, AMARA)) {
+                countdownEl.innerHTML = '<span class="countdown-text">🎂 ¡Hoy es el cumpleaños de <span class="countdown-highlight">Amara</span>! 🎂</span>';
+            } else if (sameDay(today, DIEGO)) {
+                countdownEl.innerHTML = '<span class="countdown-text">🎂 ¡Hoy es el cumpleaños de <span class="countdown-highlight-diego">Diego</span>! 🎂</span>';
+            } else if (daysToAmara > 0 && daysToAmara <= daysToDiego) {
+                countdownEl.innerHTML = '<span class="countdown-text">Faltan <span class="countdown-highlight">' + daysToAmara + ' días</span> para el cumple de Amara ♡</span>';
+            } else if (daysToDiego > 0) {
+                countdownEl.innerHTML = '<span class="countdown-text">Faltan <span class="countdown-highlight-diego">' + daysToDiego + ' días</span> para el cumple de Diego</span>';
+            } else {
+                countdownEl.style.display = 'none';
+            }
+
+            // Mensaje especial cumpleaños
+            var birthdayEl = document.getElementById('birthdayMessage');
+            if (sameDay(today, AMARA)) {
+                birthdayEl.innerHTML = '<div class="birthday-message"><span class="birthday-emoji">🎉🎂💕</span><span class="birthday-text">¡Feliz cumpleaños, Amara!<br>Aunque estemos lejos, hoy celebro contigo.</span></div>';
+            } else if (sameDay(today, DIEGO)) {
+                birthdayEl.innerHTML = '<div class="birthday-message birthday-message-diego"><span class="birthday-emoji">🎉🎂🎊</span><span class="birthday-text">¡Feliz cumpleaños, Diego!</span></div>';
+            }
+
+            // Generar matriz 14x14
+            var matrix = document.getElementById('dotMatrix');
+            var html = '';
+            var completed = 0;
+
+            for (var i = 0; i < TOTAL; i++) {
+                var d = new Date(START.getTime());
+                d.setDate(d.getDate() + i);
+                
+                var cls = 'dot';
+                var isPast = d < today;
+                var isToday = sameDay(d, today);
+                
+                if (sameDay(d, DIEGO)) {
+                    cls = cls + ' dot-diego';
+                    if (isPast || isToday) completed++;
+                } else if (inRange(d, REDACTED_START, REDACTED_END)) {
+                    cls = cls + ' dot-redacted';
+                } else if (sameDay(d, AMARA)) {
+                    cls = cls + ' dot-amara';
+                    if (isPast || isToday) completed++;
+                } else if (isToday) {
+                    cls = cls + ' dot-today';
+                    completed++;
+                } else if (isPast) {
+                    cls = cls + ' dot-filled';
+                    completed++;
+                }
+                
+                html = html + '<div class="' + cls + '"></div>';
+            }
+
+            matrix.innerHTML = html;
+
+            var percent = Math.round((completed / TOTAL) * 100);
+            var weeks = Math.floor(completed / 7);
+
+            document.getElementById('statCompleted').textContent = completed;
+            document.getElementById('statWeeks').textContent = weeks;
+            document.getElementById('statPercent').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('motivationText').textContent = getMotivation(percent);
+        })();
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/LH-XLIV/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registrado:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('SW error:', error);
+                    });
+            });
+        }
+    </script>
+
+    <!-- Control Panel Functions -->
+    <script>
+        var API_URL = 'https://script.google.com/macros/s/AKfycbzRlf3ZRBr7vFPr_YFLSDR-e_a95kJIfu1f006ww31UhHvYAxAVz12jQom8fWeLGQuM/exec';
+        var PASSWORD = 'lhxliv2025';
+
+        function showStatus(msg, isError) {
+            var statusEl = document.getElementById('controlStatus');
+            statusEl.textContent = msg;
+            statusEl.className = 'control-status' + (isError ? ' control-status-error' : '');
+            setTimeout(function() {
+                statusEl.textContent = '';
+            }, 3000);
+        }
+
+        var pendingHot = null;
+
+        function enviarEstado(persona, campo, valor, callback) {
+            var url = API_URL + '?pass=' + PASSWORD + '&persona=' + persona + '&campo=' + campo + '&valor=' + encodeURIComponent(valor);
+            
+            fetch(url)
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (callback) callback(data.success);
+                })
+                .catch(function(error) {
+                    if (callback) callback(false);
+                });
+        }
+
+        // Hot toggle - solo cambia visual, no envía
+        function toggleHot(valor) {
+            pendingHot = valor;
+            document.getElementById('hotNo').className = 'control-toggle-btn' + (valor === 'No' ? ' active' : '');
+            document.getElementById('hotSi').className = 'control-toggle-btn' + (valor === 'Si' ? ' active' : '');
+        }
+
+        // Enviar todo al pulsar el botón
+        function enviarTodo() {
+            var diegoEstado = document.getElementById('diegoSelect').value;
+            var amaraEstado = document.getElementById('amaraSelect').value;
+            var diegoMensaje = document.getElementById('diegoMensaje').value;
+            var amaraMensaje = document.getElementById('amaraMensaje').value;
+            var sipLevel = document.getElementById('sipSelect').value;
+            
+            var envios = [];
+            
+            if (diegoEstado) envios.push({persona: 'diego', campo: 'estado', valor: diegoEstado});
+            if (amaraEstado) envios.push({persona: 'amara', campo: 'estado', valor: amaraEstado});
+            if (pendingHot) envios.push({persona: 'amara', campo: 'hot', valor: pendingHot});
+            if (diegoMensaje) envios.push({persona: 'diego', campo: 'mensaje', valor: diegoMensaje});
+            if (amaraMensaje) envios.push({persona: 'amara', campo: 'mensaje', valor: amaraMensaje});
+            if (sipLevel) envios.push({persona: 'diego', campo: 'sip', valor: sipLevel});
+            
+            if (envios.length === 0) {
+                showStatus('No hay cambios para enviar', true);
+                return;
+            }
+            
+            showStatus('Enviando ' + envios.length + ' cambios...');
+            
+            var completados = 0;
+            var errores = 0;
+            
+            envios.forEach(function(envio) {
+                enviarEstado(envio.persona, envio.campo, envio.valor, function(success) {
+                    completados++;
+                    if (!success) errores++;
+                    
+                    if (completados === envios.length) {
+                        if (errores === 0) {
+                            showStatus('✓ Todos los cambios enviados');
+                            setTimeout(function() { location.reload(); }, 1500);
+                        } else {
+                            showStatus('Enviados con ' + errores + ' errores', true);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/LH-XLIV/manifest.json">
+    <link rel="apple-touch-icon" href="/LH-XLIV/icons/apple-touch-icon.png">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LHXLIV">
+    <meta name="theme-color" content="#111111">
+    <title>LHXLIV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background-color: #0a0a0a;
+            color: #dddddd;
+            min-height: 100vh;
+            padding: 20px 15px;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            position: relative;
+        }
+
+        /* Scanlines effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Grid background */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .top-bar {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #555555;
+            letter-spacing: 1px;
+        }
+
+        .top-bar-left {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .signal-bars {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: flex-end;
+            align-items: flex-end;
+            gap: 2px;
+            height: 12px;
+        }
+
+        .signal-bar {
+            width: 3px;
+            background-color: #00ff00;
+            -webkit-animation: signalPulse 1.5s ease-in-out infinite;
+            animation: signalPulse 1.5s ease-in-out infinite;
+        }
+
+        .signal-bar:nth-child(1) { height: 4px; animation-delay: 0s; }
+        .signal-bar:nth-child(2) { height: 7px; animation-delay: 0.2s; }
+        .signal-bar:nth-child(3) { height: 10px; animation-delay: 0.4s; }
+        .signal-bar:nth-child(4) { height: 12px; animation-delay: 0.6s; }
+
+        .signal-bar-yellow {
+            background-color: #ffcc00;
+        }
+
+        .signal-bar-red {
+            background-color: #ff3333;
+        }
+
+        @-webkit-keyframes signalPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        @keyframes signalPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .link-status {
+            color: #00ff00;
+            font-weight: bold;
+            -webkit-animation: blinkText 2s ease-in-out infinite;
+            animation: blinkText 2s ease-in-out infinite;
+        }
+
+        .link-status-yellow {
+            color: #ffcc00;
+        }
+
+        .link-status-red {
+            color: #ff3333;
+        }
+
+        @-webkit-keyframes blinkText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes blinkText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .timestamp {
+            color: #777777;
+            font-size: 7px;
+        }
+
+        .alert-level {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background-color: #2a2a0a;
+            border: 1px solid #ffcc00;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .alert-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ffcc00;
+            box-shadow: 0 0 8px #ffcc00;
+            -webkit-animation: alertPulse 1s ease-in-out infinite;
+            animation: alertPulse 1s ease-in-out infinite;
+        }
+
+        @-webkit-keyframes alertPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px #ffcc00; }
+            50% { opacity: 0.6; box-shadow: 0 0 15px #ffcc00; }
+        }
+
+        @keyframes alertPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px #ffcc00; }
+            50% { opacity: 0.6; box-shadow: 0 0 15px #ffcc00; }
+        }
+
+        .alert-text {
+            font-size: 9px;
+            font-weight: bold;
+            color: #ffcc00;
+            letter-spacing: 2px;
+        }
+
+        .dashboard-title {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            font-weight: bold;
+            color: #00ff00;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #0d1a0d;
+            border: 1px solid #1a3a1a;
+        }
+
+        .mission-time {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .mission-time-item {
+            text-align: center;
+        }
+
+        .mission-time-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ff00;
+            letter-spacing: 1px;
+        }
+
+        .mission-time-label {
+            font-size: 7px;
+            color: #777777;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .flags {
+            font-size: 20px;
+            margin-bottom: 8px;
+            letter-spacing: 8px;
+        }
+
+        .mission-id {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 5px;
+            margin-bottom: 5px;
+        }
+
+        .mission-subtitle {
+            font-size: 11px;
+            color: #777777;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .daily-quote {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding-top: 12px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .status-panel {
+            display: -webkit-box;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .status-box {
+            flex: 1;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .status-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8px;
+            color: #777777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .status-indicator {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            -webkit-animation: blink 2s ease-in-out infinite;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .status-dot-green {
+            background-color: #00ff00;
+            box-shadow: 0 0 6px #00ff00;
+        }
+
+        .status-dot-yellow {
+            background-color: #ffcc00;
+            box-shadow: 0 0 6px #ffcc00;
+        }
+
+        .status-dot-red {
+            background-color: #ff3333;
+            box-shadow: 0 0 6px #ff3333;
+        }
+
+        .status-dot-pink {
+            background-color: #ff6b8a;
+            box-shadow: 0 0 6px #ff6b8a;
+        }
+
+        .status-dot-blue {
+            background-color: #7ec8e3;
+            box-shadow: 0 0 6px #7ec8e3;
+        }
+
+        .status-dot-orange {
+            background-color: #ff9933;
+            box-shadow: 0 0 6px #ff9933;
+        }
+
+        .status-dot-gray {
+            background-color: #888888;
+            box-shadow: 0 0 6px #888888;
+        }
+
+        @-webkit-keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .hot-box {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #2a1520;
+            border: 2px solid #ff6b8a;
+            text-align: center;
+            -webkit-animation: hotPulse 1.5s ease-in-out infinite;
+            animation: hotPulse 1.5s ease-in-out infinite;
+        }
+
+        .hot-text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff6b8a;
+            letter-spacing: 3px;
+        }
+
+        @-webkit-keyframes hotPulse {
+            0%, 100% { box-shadow: 0 0 5px #ff6b8a; }
+            50% { box-shadow: 0 0 20px #ff6b8a; }
+        }
+
+        @keyframes hotPulse {
+            0%, 100% { box-shadow: 0 0 5px #ff6b8a; }
+            50% { box-shadow: 0 0 20px #ff6b8a; }
+        }
+
+        .briefing-box {
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: #1a1520;
+            border: 1px solid #ff6b8a;
+            border-left: 3px solid #ff6b8a;
+        }
+
         .briefing-label {
             font-family: 'Courier New', Courier, monospace;
             font-size: 8px;
