@@ -415,16 +415,53 @@
 
         .briefing-box {
             padding: 12px;
+            padding-left: 50px;
             margin-bottom: 10px;
-            background-color: #1a1520;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
             border: 1px solid #ff6b8a;
             border-left: 3px solid #ff6b8a;
+            position: relative;
         }
 
         .briefing-box-diego {
-            background-color: #151a20;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
             border: 1px solid #7ec8e3;
             border-left: 3px solid #7ec8e3;
+        }
+
+        .briefing-avatar {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .briefing-avatar-amara {
+            background-color: #ff6b8a;
+            color: #000000;
+            box-shadow: 0 0 8px #ff6b8a;
+        }
+
+        .briefing-avatar-diego {
+            background-color: #7ec8e3;
+            color: #000000;
+            box-shadow: 0 0 8px #7ec8e3;
+        }
+
+        .briefing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
         }
 
         .briefing-label {
@@ -433,7 +470,13 @@
             color: #ff6b8a;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 6px;
+        }
+
+        .briefing-timestamp {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 7px;
+            color: #666666;
+            letter-spacing: 1px;
         }
 
         .briefing-text {
@@ -1150,20 +1193,28 @@
             </div>
         </div>
 
-        <!-- Hot status box - solo aparece si A2 = si/hot -->
+        <!-- Hot status box - solo aparece si B2 = si/hot -->
         <div class="hot-box" id="hotBox" style="display: none;">
             <span class="hot-text">💗 HOT 💗</span>
         </div>
 
         <!-- Mensaje de Diego -->
         <div class="briefing-box briefing-box-diego" id="diegoBriefingBox" style="display: none;">
-            <div class="briefing-label" style="color: #7ec8e3;">📡 Mensaje de Diego</div>
+            <div class="briefing-avatar briefing-avatar-diego">D</div>
+            <div class="briefing-header">
+                <div class="briefing-label" style="color: #7ec8e3;">📡 Mensaje de Diego</div>
+                <div class="briefing-timestamp" id="diegoTimestamp"></div>
+            </div>
             <div class="briefing-text" id="diegoBriefingText"></div>
         </div>
 
         <!-- Mensaje de Amara -->
         <div class="briefing-box" id="amaraBriefingBox" style="display: none;">
-            <div class="briefing-label">♡ Mensaje de Amara</div>
+            <div class="briefing-avatar briefing-avatar-amara">A</div>
+            <div class="briefing-header">
+                <div class="briefing-label">♡ Mensaje de Amara</div>
+                <div class="briefing-timestamp" id="amaraTimestamp"></div>
+            </div>
             <div class="briefing-text" id="amaraBriefingText"></div>
         </div>
 
@@ -1571,6 +1622,20 @@
                     });
             }
 
+            // Función para obtener timestamp actual
+            function getCurrentTimestamp() {
+                var now = new Date();
+                var h = now.getHours();
+                var m = now.getMinutes();
+                var day = now.getDate();
+                var month = now.getMonth() + 1;
+                if (h < 10) h = '0' + h;
+                if (m < 10) m = '0' + m;
+                if (day < 10) day = '0' + day;
+                if (month < 10) month = '0' + month;
+                return day + '/' + month + ' ' + h + ':' + m;
+            }
+
             // Cargar mensaje de Amara desde B3
             function loadAmaraBriefing() {
                 var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&range=B3';
@@ -1582,6 +1647,7 @@
                         
                         if (briefing && briefing.length > 0) {
                             document.getElementById('amaraBriefingText').textContent = briefing;
+                            document.getElementById('amaraTimestamp').textContent = getCurrentTimestamp();
                             document.getElementById('amaraBriefingBox').style.display = 'block';
                         }
                     })
@@ -1601,6 +1667,7 @@
                         
                         if (briefing && briefing.length > 0) {
                             document.getElementById('diegoBriefingText').textContent = briefing;
+                            document.getElementById('diegoTimestamp').textContent = getCurrentTimestamp();
                             document.getElementById('diegoBriefingBox').style.display = 'block';
                         }
                     })
