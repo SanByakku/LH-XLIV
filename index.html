@@ -1170,6 +1170,160 @@
             border-color: #ff6b8a;
             color: #000000;
         }
+
+        /* Mood Meter Styles */
+        .mood-section {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+        }
+
+        .mood-section-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            color: #00ff00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .mood-meter {
+            margin-bottom: 20px;
+        }
+
+        .mood-meter-header {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .mood-meter-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            color: #777777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .mood-meter-value {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .mood-meter-value-diego {
+            color: #7ec8e3;
+        }
+
+        .mood-meter-value-amara {
+            color: #ff6b8a;
+        }
+
+        .mood-slider-container {
+            position: relative;
+            width: 100%;
+            height: 30px;
+        }
+
+        .mood-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            outline: none;
+            margin: 10px 0;
+        }
+
+        .mood-slider-diego {
+            background: -webkit-linear-gradient(left, #ff3333 0%, #ffcc00 50%, #00ff00 100%);
+            background: linear-gradient(to right, #ff3333 0%, #ffcc00 50%, #00ff00 100%);
+        }
+
+        .mood-slider-amara {
+            background: -webkit-linear-gradient(left, #ff3333 0%, #ffcc00 50%, #ff6b8a 100%);
+            background: linear-gradient(to right, #ff3333 0%, #ffcc00 50%, #ff6b8a 100%);
+        }
+
+        .mood-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            border: 2px solid #333333;
+            -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        .mood-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            border: 2px solid #333333;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        .mood-labels {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 7px;
+            color: #555555;
+            margin-top: 2px;
+        }
+
+        .mood-emoji {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        .mood-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #1a2a3a;
+            border: 1px solid #7ec8e3;
+            color: #7ec8e3;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .mood-btn:active {
+            background-color: #7ec8e3;
+            color: #000000;
+        }
+
+        .mood-status {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            color: #00ff00;
+            text-align: center;
+            margin-top: 10px;
+            min-height: 14px;
+        }
     </style>
 </head>
 <body>
@@ -1459,6 +1613,46 @@
             </div>
 
             <div class="control-status" id="controlStatus"></div>
+        </div>
+
+        <!-- Mood Meter Section -->
+        <div class="mood-section">
+            <div class="mood-section-title">▌ Medidor de Ánimo ▌</div>
+            
+            <!-- Diego Mood -->
+            <div class="mood-meter">
+                <div class="mood-meter-header">
+                    <span class="mood-meter-label"><span class="mood-emoji">🔵</span> Diego</span>
+                    <span class="mood-meter-value mood-meter-value-diego" id="diegoMoodValue">5</span>
+                </div>
+                <div class="mood-slider-container">
+                    <input type="range" min="1" max="10" value="5" class="mood-slider mood-slider-diego" id="diegoMoodSlider" oninput="updateMoodValue('diego', this.value)">
+                </div>
+                <div class="mood-labels">
+                    <span>😢 1</span>
+                    <span>😐 5</span>
+                    <span>😊 10</span>
+                </div>
+            </div>
+
+            <!-- Amara Mood -->
+            <div class="mood-meter">
+                <div class="mood-meter-header">
+                    <span class="mood-meter-label"><span class="mood-emoji">🩷</span> Amara</span>
+                    <span class="mood-meter-value mood-meter-value-amara" id="amaraMoodValue">5</span>
+                </div>
+                <div class="mood-slider-container">
+                    <input type="range" min="1" max="10" value="5" class="mood-slider mood-slider-amara" id="amaraMoodSlider" oninput="updateMoodValue('amara', this.value)">
+                </div>
+                <div class="mood-labels">
+                    <span>😢 1</span>
+                    <span>😐 5</span>
+                    <span>💕 10</span>
+                </div>
+            </div>
+
+            <button class="mood-btn" onclick="enviarMood()">📊 REGISTRAR ÁNIMO</button>
+            <div class="mood-status" id="moodStatus"></div>
         </div>
     </div>
 
@@ -2030,6 +2224,55 @@
                 });
             });
         }
+
+        // Mood Meter Functions
+        function updateMoodValue(persona, value) {
+            var emoji = '';
+            var num = parseInt(value);
+            
+            if (num <= 2) emoji = '😢';
+            else if (num <= 4) emoji = '😕';
+            else if (num <= 6) emoji = '😐';
+            else if (num <= 8) emoji = '🙂';
+            else emoji = '😊';
+            
+            document.getElementById(persona + 'MoodValue').textContent = emoji + ' ' + value;
+        }
+
+        function showMoodStatus(msg, isError) {
+            var statusEl = document.getElementById('moodStatus');
+            statusEl.textContent = msg;
+            statusEl.style.color = isError ? '#ff3333' : '#00ff00';
+            setTimeout(function() {
+                statusEl.textContent = '';
+            }, 3000);
+        }
+
+        function enviarMood() {
+            var diegoMood = document.getElementById('diegoMoodSlider').value;
+            var amaraMood = document.getElementById('amaraMoodSlider').value;
+            
+            showMoodStatus('Registrando ánimo...');
+            
+            var url = API_URL + '?pass=' + PASSWORD + '&persona=mood&campo=registro&diegoMood=' + diegoMood + '&amaraMood=' + amaraMood;
+            
+            fetch(url)
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        showMoodStatus('✓ Ánimo registrado: Diego ' + diegoMood + '/10, Amara ' + amaraMood + '/10');
+                    } else {
+                        showMoodStatus('Error: ' + data.error, true);
+                    }
+                })
+                .catch(function(error) {
+                    showMoodStatus('Error de conexión', true);
+                });
+        }
+
+        // Inicializar valores de mood
+        updateMoodValue('diego', 5);
+        updateMoodValue('amara', 5);
     </script>
 </body>
 </html>
