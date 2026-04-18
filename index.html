@@ -2028,24 +2028,37 @@
                     .then(function(data) {
                         var mood = data.replace(/"/g, '').trim();
                         var num = parseInt(mood);
-                        if (num >= 1 && num <= 10) {
+                        if (!isNaN(num) && num >= 1 && num <= 10) {
                             document.getElementById('diegoMoodSlider').value = num;
                             updateMoodDisplay('diego', num);
+                        } else {
+                            // Si no hay valor válido, mostrar 5 por defecto
+                            document.getElementById('diegoMoodSlider').value = 5;
+                            updateMoodDisplay('diego', 5);
                         }
                     })
-                    .catch(function() {});
+                    .catch(function() {
+                        document.getElementById('diegoMoodSlider').value = 5;
+                        updateMoodDisplay('diego', 5);
+                    });
                 
                 fetch(urlAmara)
                     .then(function(response) { return response.text(); })
                     .then(function(data) {
                         var mood = data.replace(/"/g, '').trim();
                         var num = parseInt(mood);
-                        if (num >= 1 && num <= 10) {
+                        if (!isNaN(num) && num >= 1 && num <= 10) {
                             document.getElementById('amaraMoodSlider').value = num;
                             updateMoodDisplay('amara', num);
+                        } else {
+                            document.getElementById('amaraMoodSlider').value = 5;
+                            updateMoodDisplay('amara', 5);
                         }
                     })
-                    .catch(function() {});
+                    .catch(function() {
+                        document.getElementById('amaraMoodSlider').value = 5;
+                        updateMoodDisplay('amara', 5);
+                    });
             }
 
             // Diego en A1, Amara en B1
